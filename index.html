@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gacha Event Tracker — Genshin · HSR · WuWa · NTE</title>
+  <meta name="description" content="Календарь-таймлайн событий и баннеров для Genshin Impact, Honkai: Star Rail, Wuthering Waves и Neverness to Everness." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <span class="brand__mark">◆</span>
+        <div>
+          <h1 class="brand__title">Gacha Event Tracker</h1>
+          <p class="brand__sub">Genshin · Star Rail · Wuthering Waves · NTE</p>
+        </div>
+      </div>
+      <div class="topbar__actions">
+        <span id="liveStatus" class="live-status" data-state="idle">снапшот</span>
+        <button id="refreshBtn" class="btn-refresh" type="button" title="Обновить из live-API">⟳ Обновить</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Фильтры -->
+    <section class="filters" aria-label="Фильтры">
+      <div class="filter-row" id="gameFilters" data-group="game">
+        <button class="chip is-active" data-val="all">Все игры</button>
+        <button class="chip" data-val="genshin" data-game="genshin">Genshin</button>
+        <button class="chip" data-val="hsr" data-game="hsr">Star Rail</button>
+        <button class="chip" data-val="wuwa" data-game="wuwa">WuWa</button>
+        <button class="chip" data-val="nte" data-game="nte">NTE</button>
+      </div>
+      <div class="filter-row" id="typeFilters" data-group="type">
+        <button class="chip is-active" data-val="all">Всё</button>
+        <button class="chip" data-val="banner">Баннеры</button>
+        <button class="chip" data-val="event">События</button>
+        <button class="chip" data-val="version">Версии</button>
+      </div>
+    </section>
+
+    <!-- Бейджи свежести по играм -->
+    <div id="freshBadges" class="fresh-badges" aria-label="Свежесть данных"></div>
+
+    <!-- Таймлайн-календарь -->
+    <section class="tl-wrap" aria-label="Календарь событий">
+      <div id="timeline" class="tl"></div>
+    </section>
+    <p id="emptyState" class="empty" hidden>Под выбранные фильтры в этом окне ничего нет.</p>
+
+    <!-- События без точной даты -->
+    <section id="tbaSection" class="tba" hidden>
+      <h2 class="tba__title">Без точной даты (TBA)</h2>
+      <div id="tbaList" class="tba__list"></div>
+    </section>
+
+    <!-- Промокоды -->
+    <section class="codes" aria-label="Промокоды">
+      <h2 class="codes__title">🎁 Промокоды <span id="codesFresh" class="codes__fresh"></span></h2>
+      <div id="codesList" class="codes__list"></div>
+    </section>
+  </main>
+
+  <!-- Плавающий тултип -->
+  <div id="tlTip" class="tl-tip" hidden></div>
+
+  <footer class="foot">
+    <p>Данные: api.ennead.cc (live, Genshin/HSR) · game8.co, neverness.gg (снапшот, WuWa/NTE). Неофициальный проект.</p>
+  </footer>
+
+  <!-- Данные (снапшоты) -->
+  <script src="data/events-genshin.js"></script>
+  <script src="data/events-hsr.js"></script>
+  <script src="data/events-wuwa.js"></script>
+  <script src="data/events-nte.js"></script>
+  <script src="data/codes.js"></script>
+  <!-- Логика -->
+  <script src="js/format.js"></script>
+  <script src="js/sources.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
