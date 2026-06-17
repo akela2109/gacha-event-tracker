@@ -73,6 +73,38 @@ body {
 #gameFilters .chip[data-game="wuwa"].is-active { background: var(--g-wuwa); border-color: var(--g-wuwa); color: #241c02; }
 #gameFilters .chip[data-game="nte"].is-active { background: var(--g-nte); border-color: var(--g-nte); color: #2a0a17; }
 
+/* ---- Tabs (вкладки по играм) ---- */
+.tabs { gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 0; margin-bottom: 4px; }
+.tab { border: 1px solid transparent; border-bottom: none; border-radius: 10px 10px 0 0;
+  background: transparent; color: var(--txt-dim); padding: 9px 16px; position: relative; top: 1px; }
+.tab:hover { color: var(--txt); background: var(--bg-soft); }
+.tab.is-active { color: var(--txt); background: var(--card-2); border-color: var(--line);
+  border-bottom: 1px solid var(--card-2); }
+.tab.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--accent); border-radius: 2px; }
+#gameFilters .tab[data-game="genshin"].is-active::after { background: var(--g-genshin); }
+#gameFilters .tab[data-game="hsr"].is-active::after { background: var(--g-hsr); }
+#gameFilters .tab[data-game="wuwa"].is-active::after { background: var(--g-wuwa); }
+#gameFilters .tab[data-game="nte"].is-active::after { background: var(--g-nte); }
+
+/* ---- View title / game hero ---- */
+.view-title { font-size: 16px; font-weight: 700; color: var(--txt-dim); margin: 4px 0 14px; }
+.game-hero { display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  margin: 4px 0 16px; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line);
+  border-left: 4px solid var(--gc, var(--accent));
+  background: linear-gradient(100deg, color-mix(in srgb, var(--gc, var(--accent)) 16%, var(--card)) 0%, var(--card) 60%); }
+.game-hero[data-game="genshin"] { --gc: var(--g-genshin); }
+.game-hero[data-game="hsr"]     { --gc: var(--g-hsr); }
+.game-hero[data-game="wuwa"]    { --gc: var(--g-wuwa); }
+.game-hero[data-game="nte"]     { --gc: var(--g-nte); }
+.game-hero__main { display: flex; align-items: center; gap: 10px; }
+.game-hero__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--gc, var(--accent));
+  box-shadow: 0 0 12px var(--gc, var(--accent)); }
+.game-hero__title { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--txt); }
+.game-hero__ver { font-size: 12px; font-weight: 700; color: var(--gc, var(--accent));
+  border: 1px solid var(--gc, var(--accent)); padding: 2px 9px; border-radius: 999px; }
+.game-hero__meta { font-size: 12px; color: var(--txt-faint); white-space: nowrap; }
+
 /* ---- Fresh badges ---- */
 .fresh-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
 .fresh { font-size: 11.5px; padding: 4px 10px; border-radius: 8px; background: var(--bg-soft);
@@ -86,19 +118,22 @@ body {
 .tl-wrap { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
   box-shadow: var(--shadow); overflow: hidden; }
 .tl { overflow-x: auto; overflow-y: hidden; }
-.tl__head, .lane { display: grid; grid-template-columns: var(--label) 1fr; min-width: var(--tl-min); }
+.tl__head, .cat-row { display: grid; grid-template-columns: var(--label) 1fr; min-width: var(--tl-min); }
 
 /* шапка-ось */
 .tl__head { position: sticky; top: 0; z-index: 5; background: var(--card-2); border-bottom: 1px solid var(--line); }
 .tl__head-spacer { border-right: 1px solid var(--line); }
-.tl__axis { position: relative; height: 44px; }
-.axis-month { position: absolute; top: 6px; font-size: 12.5px; font-weight: 700; color: var(--txt);
-  transform: translateX(-50%); white-space: nowrap; letter-spacing: .01em; }
-.axis-tick { position: absolute; bottom: 4px; font-size: 10.5px; color: var(--txt-faint); transform: translateX(-50%); }
-.axis-tick::before { content: ""; position: absolute; bottom: -4px; left: 50%; width: 1px; height: 5px; background: var(--line); }
+.tl__axis { position: relative; height: 58px; }
+.axis-month { position: absolute; top: 5px; padding-left: 6px; font-size: 12.5px; font-weight: 700; color: var(--txt);
+  white-space: nowrap; letter-spacing: .01em; }
 .axis-monthline { position: absolute; top: 0; bottom: -10000px; width: 1px; background: var(--line); }
-.axis-today { position: absolute; top: 4px; transform: translateX(-50%); font-size: 10px; font-weight: 700;
-  color: #06121f; background: var(--accent); padding: 1px 6px; border-radius: 6px; white-space: nowrap; }
+/* по-дневная шкала: день недели + число */
+.axis-day { position: absolute; bottom: 5px; transform: translateX(-50%); display: flex; flex-direction: column;
+  align-items: center; line-height: 1.15; pointer-events: none; }
+.axis-day__wd { font-size: 9px; text-transform: uppercase; letter-spacing: .02em; color: var(--txt-faint); }
+.axis-day__d { font-size: 11px; font-weight: 600; color: var(--txt-dim); }
+.axis-day.is-weekend .axis-day__wd, .axis-day.is-weekend .axis-day__d { color: var(--txt-faint); opacity: .65; }
+.axis-day.is-today .axis-day__wd, .axis-day.is-today .axis-day__d { color: var(--accent); font-weight: 800; }
 
 /* дорожка игры */
 .lane { border-bottom: 1px solid var(--line-soft); }
@@ -107,12 +142,25 @@ body {
 .lane[data-game="hsr"]     { --gc: var(--g-hsr); }
 .lane[data-game="wuwa"]    { --gc: var(--g-wuwa); }
 .lane[data-game="nte"]     { --gc: var(--g-nte); }
-.lane__label { border-right: 1px solid var(--line); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px;
-  position: sticky; left: 0; z-index: 4; background: var(--card); }
-.lane__label b { font-size: 13px; font-weight: 700; color: var(--gc); }
-.lane__label small { font-size: 10.5px; color: var(--txt-faint); }
-.lane__track { position: relative; padding: 8px 0; min-height: 46px;
+/* мини-заголовок игры (над её категориями) */
+.lane__game { position: sticky; left: 0; z-index: 4; background: var(--card);
+  padding: 7px 12px 3px; display: flex; align-items: baseline; gap: 7px;
+  border-top: 1px solid var(--line-soft); }
+.lane:first-child .lane__game { border-top: none; }
+.lane__game b { font-size: 13px; font-weight: 800; color: var(--gc); }
+.lane__game small { font-size: 10.5px; color: var(--txt-faint); }
+/* строка-категория: подпись слева + суб-трек справа */
+.cat-row__label { border-right: 1px solid var(--line); padding: 5px 12px; display: flex; align-items: center; gap: 6px;
+  position: sticky; left: 0; z-index: 4; background: var(--card);
+  font-size: 11px; font-weight: 600; color: var(--txt-dim); }
+.cat-row__label .cat-ic { color: var(--gc); font-size: 12px; }
+.cat-row__track { position: relative; padding: 5px 0; min-height: 34px;
   background-image: linear-gradient(to right, var(--line-soft) 1px, transparent 1px); background-repeat: repeat-x; }
+.lane-empty { position: absolute; left: 10px; top: 10px; font-size: 12px; color: var(--txt-faint); }
+
+/* solo-режим: одна игра во всю ширину; колонка-лейбл остаётся для подписей категорий */
+.tl.is-solo .lane__game { display: none; }
+.tl.is-solo .tl-bar { font-size: 12.5px; }
 
 /* линия "сегодня" */
 .tl-today { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--accent);
@@ -126,12 +174,22 @@ body {
 .tl-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tl-bar:hover { filter: brightness(1.12); transform: translateY(-1px); z-index: 6; }
 .tl-bar.is-event { opacity: .7; }
+.tl-bar.is-endgame { background-image: repeating-linear-gradient(45deg, rgba(0,0,0,.18) 0 5px, rgba(255,255,255,.07) 5px 10px);
+  border-color: rgba(255,255,255,.5); box-shadow: inset 0 0 0 1px rgba(255,255,255,.16); }
+.tl-bar.is-endgame::before { content: "⚔"; font-size: 11px; opacity: .85; margin-right: 1px; }
 .tl-bar.is-version { background: transparent; color: var(--gc); border: 1.5px dashed var(--gc); font-weight: 700; }
 .tl-bar.is-ended { opacity: .32; }
 .tl-bar.is-active { box-shadow: 0 0 0 1.5px rgba(255,255,255,.3), 0 0 12px -2px var(--gc); }
 .tl-bar.clip-left { border-top-left-radius: 0; border-bottom-left-radius: 0; border-left: 2px solid rgba(255,255,255,.55); }
 .tl-bar.clip-right { border-top-right-radius: 0; border-bottom-right-radius: 0;
   -webkit-mask-image: linear-gradient(to right, #000 86%, transparent); mask-image: linear-gradient(to right, #000 86%, transparent); }
+
+/* пилюля-отсчёт «осталось дней» по центру стыка линий */
+.tl-end { position: absolute; transform: translateX(-50%);
+  height: 16px; line-height: 16px; padding: 0 6px; border-radius: 999px;
+  background: var(--card-2); border: 1px solid var(--line);
+  font-size: 10px; font-weight: 700; color: var(--txt-dim); white-space: nowrap;
+  pointer-events: none; z-index: 5; }
 
 .empty { text-align: center; color: var(--txt-faint); padding: 40px 0; }
 
@@ -141,8 +199,12 @@ body {
   box-shadow: 0 12px 30px rgba(0,0,0,.5); }
 .tl-tip b { display: block; font-size: 13px; margin-bottom: 2px; }
 .tl-tip .tip-game { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.tl-tip .tip-type { font-size: 10px; font-weight: 700; color: var(--txt-dim); margin-left: 6px;
+  padding: 1px 6px; border-radius: 999px; border: 1px solid var(--line); }
 .tl-tip .tip-row { font-size: 12px; color: var(--txt-dim); margin-top: 3px; }
 .tl-tip .tip-timer { font-size: 12px; font-weight: 600; margin-top: 4px; }
+.tl-tip .tip-parts { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 3px; }
+.tl-tip .tip-part { font-size: 12px; color: var(--txt); }
 
 /* ---- TBA ---- */
 .tba { margin-top: 22px; }

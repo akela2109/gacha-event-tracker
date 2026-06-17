@@ -30,23 +30,28 @@
   <main class="wrap">
     <!-- Фильтры -->
     <section class="filters" aria-label="Фильтры">
-      <div class="filter-row" id="gameFilters" data-group="game">
-        <button class="chip is-active" data-val="all">Все игры</button>
-        <button class="chip" data-val="genshin" data-game="genshin">Genshin</button>
-        <button class="chip" data-val="hsr" data-game="hsr">Star Rail</button>
-        <button class="chip" data-val="wuwa" data-game="wuwa">WuWa</button>
-        <button class="chip" data-val="nte" data-game="nte">NTE</button>
+      <div class="filter-row tabs" id="gameFilters" data-group="game" role="tablist">
+        <button class="chip tab is-active" data-val="all">◆ Сводка по всем</button>
+        <button class="chip tab" data-val="genshin" data-game="genshin">Genshin</button>
+        <button class="chip tab" data-val="hsr" data-game="hsr">Star Rail</button>
+        <button class="chip tab" data-val="wuwa" data-game="wuwa">WuWa</button>
+        <button class="chip tab" data-val="nte" data-game="nte">NTE</button>
       </div>
       <div class="filter-row" id="typeFilters" data-group="type">
         <button class="chip is-active" data-val="all">Всё</button>
-        <button class="chip" data-val="banner">Баннеры</button>
-        <button class="chip" data-val="event">События</button>
-        <button class="chip" data-val="version">Версии</button>
+        <button class="chip" data-val="banner">▰ Баннеры</button>
+        <button class="chip" data-val="event">◇ Ивенты</button>
+        <button class="chip" data-val="endgame">⚔ Эндгейм</button>
+        <button class="chip" data-val="version">◆ Версии</button>
       </div>
     </section>
 
     <!-- Бейджи свежести по играм -->
     <div id="freshBadges" class="fresh-badges" aria-label="Свежесть данных"></div>
+
+    <!-- Заголовок вида / шапка активной игры -->
+    <h2 id="viewTitle" class="view-title">Сводка — все игры</h2>
+    <section id="gameHero" class="game-hero" hidden aria-label="Активная игра"></section>
 
     <!-- Таймлайн-календарь -->
     <section class="tl-wrap" aria-label="Календарь событий">

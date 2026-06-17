@@ -5,6 +5,24 @@
   var DAY = 86400000;
   var GAME_ORDER = ["genshin", "hsr", "wuwa", "nte"];
 
+  // Категории контента (порядок сверху вниз внутри дорожки игры).
+  var CATS = [
+    { key: "banner",  label: "Баннеры", icon: "▰", types: ["banner"] },
+    { key: "event",   label: "Ивенты",  icon: "◇", types: ["event"] },
+    { key: "endgame", label: "Эндгейм", icon: "⚔", types: ["endgame"] },
+    { key: "version", label: "Версии",  icon: "◆", types: ["version", "maintenance"] }
+  ];
+  var TYPE_CAT = {};
+  CATS.forEach(function (c) { c.types.forEach(function (t) { TYPE_CAT[t] = c.key; }); });
+  function catOf(type) { return TYPE_CAT[type] || "event"; }
+  var TYPE_LABEL = { banner: "Баннер", event: "Ивент", endgame: "Эндгейм", version: "Версия", maintenance: "Тех. работы" };
+
+  // Режим отображения: SOLO (одна игра) меняет масштаб строк/полос.
+  var SOLO = false, STEP = 30, BAR_H = 24;
+  var DAY_PX = 30;                                  // ширина одного дня (px) → ширина полотна и скролл
+  var WD = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]; // дни недели (RU), индекс = getDay()
+  var didScroll = false;                            // авто-скролл к «сегодня» — только при первой отрисовке
+
   var state = {
     items: SOURCES.buildFromSnapshots(),
     filters: { game: "all", type: "all" },
@@ -39,11 +57,37 @@
     return state.filters.game === "all" ? GAME_ORDER : [state.filters.game];
   }
 
-  // Разложить события игры: помещаемые в окно vs TBA. Помечаем actual start/end (ms).
+  // Слить баннеры одной игры с ОДИНАКОВЫМИ датами старта/конца в одну линию
+  // (баннеры персонажей и оружия в gacha-играх всегда идут синхронно).
+  function mergeBanners(items) {
+    var banners = [], others = [];
+    items.forEach(function (it) { (it.type === "banner" ? banners : others).push(it); });
+    var groups = {}, order = [];
+    banners.forEach(function (b) {
+      var key = String(b.startsAt == null ? "?" : b.startsAt) + "|" + String(b.endsAt == null ? "?" : b.endsAt);
+      if (!groups[key]) { groups[key] = []; order.push(key); }
+      groups[key].push(b);
+    });
+    var merged = order.map(function (k) {
+      var g = groups[k];
+      if (g.length === 1) return g[0];
+      var names = g.map(function (b) { return b.title; }).filter(Boolean);
+      var ver = "";
+      for (var i = 0; i < g.length; i++) { if (g[i].subtitle) { ver = g[i].subtitle; break; } }
+      return { game: g[0].game, type: "banner", title: names.join(" · "),
+        subtitle: ver, startsAt: g[0].startsAt, endsAt: g[0].endsAt,
+        image: g[0].image, url: null, source: g[0].source, description: "",
+        parts: g.map(function (b) { return { title: b.title, subtitle: b.subtitle || "" }; }) };
+    });
+    return others.concat(merged);
+  }
+
+  // Разложить события игры по категориям: помещаемые в окно (packRows на категорию) vs TBA.
   function laneData(game) {
-    var placed = [], tba = [];
-    state.items.forEach(function (it) {
-      if (it.game !== game || !passesType(it)) return;
+    var tba = [], byCat = {};
+    var gameItems = mergeBanners(state.items.filter(function (it) { return it.game === game; }));
+    gameItems.forEach(function (it) {
+      if (!passesType(it)) return;
       var s = FMT.toDate(it.startsAt);
       var e = FMT.toDate(it.endsAt);
       if (!s) { // нет старта → нельзя разместить
@@ -53,9 +97,12 @@
       var aStart = s.getTime();
       var aEnd = e ? e.getTime() : WIN.end;      // ongoing → тянем до конца окна
       if (aEnd <= WIN.start || aStart >= WIN.end) return; // вне окна
-      placed.push({ it: it, aStart: aStart, aEnd: aEnd, openEnd: !e });
+      var key = catOf(it.type);
+      (byCat[key] || (byCat[key] = [])).push({ it: it, aStart: aStart, aEnd: aEnd, openEnd: !e });
     });
-    return { placed: packRows(placed), tba: tba };
+    var cats = CATS.filter(function (c) { return byCat[c.key] && byCat[c.key].length; })
+      .map(function (c) { return { meta: c, rows: packRows(byCat[c.key]) }; });
+    return { cats: cats, tba: tba };
   }
 
   // Жадная укладка интервалов в ряды без наложений (по actual start/end).
@@ -79,31 +126,31 @@
   // ---------- Рендер ----------
   function axisHTML() {
     var h = "";
-    // подписи месяцев (центр своего отрезка внутри окна)
-    var c1 = pct((WIN.start + WIN.nextMonth) / 2);
-    var c2 = pct((WIN.nextMonth + WIN.end) / 2);
-    h += '<div class="axis-month" style="left:' + c1 + '%">' + MONTHS_FULL[WIN.m1.getMonth()] + " " + WIN.m1.getFullYear() + '</div>';
-    h += '<div class="axis-month" style="left:' + c2 + '%">' + MONTHS_FULL[WIN.m2.getMonth()] + " " + WIN.m2.getFullYear() + '</div>';
+    // подписи месяцев у начала своего месяца (лево-выравнивание)
+    h += '<div class="axis-month" style="left:' + pct(WIN.start) + '%">' + MONTHS_FULL[WIN.m1.getMonth()] + " " + WIN.m1.getFullYear() + '</div>';
+    h += '<div class="axis-month" style="left:' + pct(WIN.nextMonth) + '%">' + MONTHS_FULL[WIN.m2.getMonth()] + " " + WIN.m2.getFullYear() + '</div>';
     // граница месяцев
     h += '<div class="axis-monthline" style="left:' + pct(WIN.nextMonth) + '%"></div>';
-    // недельные тики
-    var totalDays = WIN.len / DAY;
-    for (var d = 0; d < totalDays - 0.5; d += 7) {
-      var t = WIN.start + d * DAY;
-      var day = new Date(t).getDate();
-      h += '<div class="axis-tick" style="left:' + pct(t) + '%">' + day + '</div>';
-    }
-    // сегодня
-    var nowT = FMT.now().getTime();
-    if (nowT >= WIN.start && nowT < WIN.end) {
-      h += '<div class="axis-today" style="left:' + pct(nowT) + '%">сегодня</div>';
+    // по дню: день недели + число
+    var totalDays = Math.round(WIN.len / DAY);
+    var nowD = FMT.now();
+    var todayKey = nowD.getFullYear() + "-" + nowD.getMonth() + "-" + nowD.getDate();
+    for (var d = 0; d < totalDays; d++) {
+      var dt = new Date(WIN.m1.getFullYear(), WIN.m1.getMonth(), 1 + d);
+      var wd = dt.getDay();
+      var cls = "axis-day";
+      if (wd === 0 || wd === 6) cls += " is-weekend";
+      if (dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDate() === todayKey) cls += " is-today";
+      h += '<div class="' + cls + '" style="left:' + pct(dt.getTime()) + '%">' +
+        '<span class="axis-day__wd">' + WD[wd] + '</span>' +
+        '<span class="axis-day__d">' + dt.getDate() + '</span></div>';
     }
     return h;
   }
 
   function gridBgStyle() {
-    var weekPct = (7 * DAY) / WIN.len * 100;
-    return 'background-size:' + weekPct + '% 100%;';
+    var dayPct = DAY / WIN.len * 100;
+    return 'background-size:' + dayPct + '% 100%;';
   }
 
   function barHTML(ev) {
@@ -117,12 +164,28 @@
     if (st === "ended") cls.push("is-ended");
     if (ev.aStart < WIN.start) cls.push("clip-left");
     if (ev.aEnd > WIN.end || ev.openEnd) cls.push("clip-right");
+    var parts = it.parts ? it.parts.map(function (p) {
+      return p.title + (p.subtitle ? " — " + p.subtitle : ""); }).join("‖") : "";
     var data = ' data-title="' + esc(it.title) + '" data-sub="' + esc(it.subtitle || "") +
       '" data-game="' + it.game + '" data-type="' + it.type +
       '" data-range="' + esc(FMT.fmtRange(it.startsAt, it.endsAt)) +
+      '" data-parts="' + esc(parts) +
       '" data-timer="' + esc(FMT.timerLabel(it.startsAt, it.endsAt)) + '"';
-    return '<div class="' + cls.join(" ") + '" style="left:' + left + '%;width:' + width + '%;top:' + ev.top + 'px"' + data + '>' +
+    return '<div class="' + cls.join(" ") + '" style="left:' + left + '%;width:' + width + '%;top:' + ev.top + 'px;height:' + BAR_H + 'px"' + data + '>' +
       '<span>' + esc(it.title) + '</span></div>';
+  }
+
+  // Пилюля-отсчёт «осталось дней» по центру стыка/конца линии (как на wuwatracker).
+  function endLabelHTML(ev) {
+    if (ev.openEnd || ev.aEnd > WIN.end) return ""; // нет конца / конец за окном
+    var st = FMT.statusOf(ev.it.startsAt, ev.it.endsAt);
+    if (st === "ended") return ""; // уже завершён — отсчитывать нечего
+    var label = FMT.daysLeftShort(ev.it.endsAt);
+    if (!label) return "";
+    var right = pct(ev.aEnd);
+    var top = ev.top + Math.round((BAR_H - 16) / 2); // вертикальный центр пилюли в полосе
+    return '<div class="tl-end" style="left:' + right + '%;top:' + top + 'px">' +
+      esc(label) + '</div>';
   }
 
   function laneHTML(game) {
@@ -132,31 +195,49 @@
     if (game === "wuwa" && window.SNAPSHOT_WUWA) ver = "v" + window.SNAPSHOT_WUWA.version;
     if (game === "nte" && window.SNAPSHOT_NTE) ver = "v" + window.SNAPSHOT_NTE.version;
 
-    var rows = data.placed;
-    var bars = "";
-    rows.forEach(function (row, ri) {
-      row.items.forEach(function (ev) { ev.top = 8 + ri * 30; bars += barHTML(ev); });
-    });
-    var trackH = Math.max(rows.length * 30 + 8, 46);
     var nowT = FMT.now().getTime();
     var today = (nowT >= WIN.start && nowT < WIN.end)
       ? '<div class="tl-today" style="left:' + pct(nowT) + '%"></div>' : "";
-    var emptyNote = rows.length ? "" : '<div style="position:absolute;left:10px;top:14px;font-size:12px;color:var(--txt-faint)">нет событий в этом окне</div>';
+
+    var catRows;
+    if (!data.cats.length) {
+      catRows = '<div class="cat-row"><div class="cat-row__label"></div>' +
+        '<div class="cat-row__track" style="height:' + (BAR_H + 12) + 'px;' + gridBgStyle() + '">' +
+          today + '<div class="lane-empty">нет событий в этом окне</div></div></div>';
+    } else {
+      catRows = data.cats.map(function (c) {
+        var bars = "";
+        c.rows.forEach(function (row, ri) {
+          row.items.forEach(function (ev) { ev.top = 5 + ri * STEP; bars += barHTML(ev) + endLabelHTML(ev); });
+        });
+        var trackH = Math.max(c.rows.length * STEP + 6, BAR_H + 12);
+        return '<div class="cat-row" data-cat="' + c.meta.key + '">' +
+          '<div class="cat-row__label"><span class="cat-ic">' + c.meta.icon + '</span>' + esc(c.meta.label) + '</div>' +
+          '<div class="cat-row__track" style="height:' + trackH + 'px;' + gridBgStyle() + '">' +
+            today + bars +
+          '</div></div>';
+      }).join("");
+    }
 
     return '<div class="lane" data-game="' + game + '">' +
-      '<div class="lane__label"><b>' + esc(g.short) + '</b>' + (ver ? '<small>' + esc(ver) + '</small>' : '') + '</div>' +
-      '<div class="lane__track" style="height:' + trackH + 'px;' + gridBgStyle() + '">' +
-        today + emptyNote + bars +
-      '</div></div>';
+      '<div class="lane__game"><b>' + esc(g.short) + '</b>' + (ver ? '<small>' + esc(ver) + '</small>' : '') + '</div>' +
+      catRows + '</div>';
   }
 
   function render() {
     WIN = buildWindow(); // пересчёт окна (на случай смены даты при долгой сессии)
+    SOLO = state.filters.game !== "all";
+    STEP = SOLO ? 40 : 30;
+    BAR_H = SOLO ? 32 : 24;
+    timeline.className = "tl" + (SOLO ? " is-solo" : "");
+    // ширина полотна = по дню × DAY_PX (полотно шире экрана → горизонтальный скролл)
+    var days = Math.round(WIN.len / DAY);
+    timeline.style.setProperty("--tl-min", "calc(var(--label) + " + (days * DAY_PX) + "px)");
     var games = activeGames();
     var anyPlaced = false, tbaAll = [];
     var lanes = games.map(function (g) {
       var d = laneData(g);
-      if (d.placed.length) anyPlaced = true;
+      if (d.cats.length) anyPlaced = true;
       tbaAll = tbaAll.concat(d.tba);
       return laneHTML(g);
     }).join("");
@@ -166,8 +247,17 @@
       lanes;
     empty.hidden = anyPlaced;
 
+    if (!didScroll) { didScroll = true; scrollToToday(); }
     renderTba(tbaAll);
     renderBadges();
+  }
+
+  // Центрировать горизонтальный скролл на «сегодня» (один раз при загрузке).
+  function scrollToToday() {
+    var el = timeline.querySelector(".axis-day.is-today");
+    if (!el) return;
+    var base = timeline.getBoundingClientRect(), rect = el.getBoundingClientRect();
+    timeline.scrollLeft += (rect.left - base.left) - timeline.clientWidth / 2;
   }
 
   function renderTba(list) {
@@ -183,7 +273,7 @@
   // ---------- Бейджи свежести ----------
   function renderBadges() {
     var meta = SOURCES.snapshotMeta();
-    badges.innerHTML = GAME_ORDER.map(function (g) {
+    badges.innerHTML = activeGames().map(function (g) {
       if (state.live[g]) {
         return '<span class="fresh" data-src="live"><span class="dot"></span>' + esc(SOURCES.GAMES[g].short) + ': live</span>';
       }
@@ -207,7 +297,7 @@
       liveStatus.textContent = any ? "live ✓" : "снапшот (offline)";
       liveStatus.dataset.state = any ? "live" : "error";
       refreshBtn.disabled = false;
-      render();
+      render(); renderGameHero();
     });
   }
   function mergeLive(game, liveItems) {
@@ -215,11 +305,42 @@
     state.live[game] = true;
   }
 
+  // ---------- Шапка активной игры / заголовок вида ----------
+  function gameVersion(game) {
+    if (game === "wuwa" && window.SNAPSHOT_WUWA) return window.SNAPSHOT_WUWA.version;
+    if (game === "nte" && window.SNAPSHOT_NTE) return window.SNAPSHOT_NTE.version;
+    // genshin/hsr: вытащить из подписи первого баннера "Версия X"
+    var b = state.items.filter(function (it) { return it.game === game && it.type === "banner" && it.subtitle; })[0];
+    if (b) { var m = /([\d.]+)/.exec(b.subtitle); return m ? m[1] : ""; }
+    return "";
+  }
+  function renderGameHero() {
+    var hero = $("#gameHero"), title = $("#viewTitle");
+    var g = state.filters.game;
+    if (g === "all") {
+      hero.hidden = true;
+      if (title) { title.hidden = false; title.textContent = "Сводка — все игры"; }
+      return;
+    }
+    if (title) title.hidden = true;
+    var info = SOURCES.GAMES[g], ver = gameVersion(g), meta = SOURCES.snapshotMeta();
+    var fresh = state.live[g] ? "live ✓" : (FMT.freshness(meta[g]).text || "");
+    hero.dataset.game = g;
+    hero.innerHTML =
+      '<div class="game-hero__main"><span class="game-hero__dot"></span>' +
+      '<h2 class="game-hero__title">' + esc(info.label) + '</h2>' +
+      (ver ? '<span class="game-hero__ver">v' + esc(ver) + '</span>' : '') + '</div>' +
+      '<div class="game-hero__meta">' + esc(fresh) + '</div>';
+    hero.hidden = false;
+  }
+
   // ---------- Промокоды ----------
   function renderCodes() {
     var data = window.CODES || { items: [] };
+    var g = state.filters.game;
     $("#codesFresh").textContent = FMT.freshness(data.generatedAt).text;
-    $("#codesList").innerHTML = data.items.map(function (c, i) {
+    var list = data.items.filter(function (c) { return g === "all" || c.game === g; });
+    $("#codesList").innerHTML = list.map(function (c, i) {
       if (c.note) {
         return '<div class="code" data-game="' + c.game + '">' +
           '<div class="code__reward">' + esc(c.reward) + (c.url ? ' <a href="' + esc(c.url) + '" target="_blank" rel="noopener">Источник →</a>' : "") + '</div>' +
@@ -236,9 +357,16 @@
   // ---------- Тултип ----------
   function showTip(bar, x, y) {
     var d = bar.dataset;
+    var partsHTML = "";
+    if (d.parts) {
+      partsHTML = '<div class="tip-parts">' + d.parts.split("‖").map(function (p) {
+        return '<div class="tip-part">🎴 ' + esc(p) + '</div>'; }).join("") + '</div>';
+    }
     tip.innerHTML = '<span class="tip-game" style="color:var(--g-' + d.game + ')">' + esc(SOURCES.GAMES[d.game].short) + '</span>' +
+      (TYPE_LABEL[d.type] ? '<span class="tip-type">' + esc(TYPE_LABEL[d.type]) + '</span>' : '') +
       '<b>' + esc(d.title) + '</b>' +
       (d.sub ? '<div class="tip-row">' + esc(d.sub) + '</div>' : '') +
+      partsHTML +
       '<div class="tip-row">📅 ' + esc(d.range) + '</div>' +
       '<div class="tip-timer">⏱ ' + esc(d.timer) + '</div>';
     tip.hidden = false;
@@ -263,7 +391,7 @@
         row.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("is-active"); });
         chip.classList.add("is-active");
         state.filters[group] = chip.dataset.val;
-        render();
+        render(); renderCodes(); renderGameHero();
       });
     });
   }
@@ -290,7 +418,7 @@
 
   function init() {
     wireFilters(); wireTip(); wireCopy();
-    renderCodes(); render();
+    renderCodes(); render(); renderGameHero();
     refreshBtn.addEventListener("click", loadLive);
     loadLive();
     setInterval(render, 60000); // двигаем линию "сегодня" / обновляем таймеры

@@ -39,10 +39,43 @@
     return r.name + (r.amount ? " ×" + r.amount : "");
   }
 
+  // --- Эндгейм-режимы (повторяющийся контент). HoYo распознаём по type_name
+  //     (стабильнее сезонных имён), с фолбэком по подстроке имени; WuWa/NTE приходят
+  //     уже размеченными type:"endgame" из снапшота.
+  var HOYO_ENDGAME_BY_TYPE = {
+    // Genshin
+    ActTypeTower: "Abyssal Moon Spire",
+    ActTypeRoleCombat: "Imaginarium Theater",
+    ActTypeHardChallenge: "Stygian Onslaught",
+    // Star Rail
+    ChallengeTypeChasm: "Memory of Chaos",
+    ChallengeTypeStory: "Pure Fiction",
+    ChallengeTypeBoss: "Apocalyptic Shadow",
+    ChallengeTypePeak: "Anomaly Arbitration"
+  };
+  var ENDGAME_NAMES = {
+    genshin: ["Spiral Abyss", "Abyssal Moon Spire", "Imaginarium Theater", "Stygian Onslaught"],
+    hsr: ["Memory of Chaos", "Pure Fiction", "Apocalyptic Shadow", "Anomaly Arbitration", "Forgotten Hall"],
+    wuwa: ["Tower of Adversity", "Tactical Hologram", "Illusive Realm"],
+    nte: ["Prime Circle", "Beyond the Rails"]
+  };
+  // Каноничное имя эндгейм-режима или null (значит — обычный ивент).
+  function endgameCanonical(game, name, typeName) {
+    if (typeName && HOYO_ENDGAME_BY_TYPE[typeName]) return HOYO_ENDGAME_BY_TYPE[typeName];
+    var list = ENDGAME_NAMES[game] || [];
+    for (var i = 0; i < list.length; i++) {
+      if (name && name.indexOf(list[i]) !== -1) return list[i];
+    }
+    return null;
+  }
+
   function normalizeHoyo(raw, game, source) {
     var out = [];
     (raw.events || []).forEach(function (e) {
-      out.push({ game: game, type: "event", title: e.name, subtitle: rewardText(e),
+      var canon = endgameCanonical(game, e.name, e.type_name);
+      out.push({ game: game, type: canon ? "endgame" : "event",
+        title: canon || e.name,
+        subtitle: canon && canon !== e.name ? e.name : rewardText(e),
         startsAt: e.start_time, endsAt: e.end_time, image: e.image_url || null,
         url: null, source: source, description: e.description || "" });
     });
@@ -53,8 +86,12 @@
         startsAt: b.start_time, endsAt: b.end_time, image: firstIcon(b),
         url: null, source: source, description: "" });
     });
+    // challenges — это и есть повторяющиеся эндгейм-режимы; каноним имя по type_name.
     (raw.challenges || []).forEach(function (c) {
-      out.push({ game: game, type: "event", title: c.name, subtitle: rewardText(c),
+      var canon = endgameCanonical(game, c.name, c.type_name) || c.name;
+      out.push({ game: game, type: "endgame",
+        title: canon,
+        subtitle: canon !== c.name ? c.name : rewardText(c),
         startsAt: c.start_time, endsAt: c.end_time, image: null,
         url: null, source: source, description: "Боевой режим / испытание" });
     });

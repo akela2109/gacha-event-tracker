@@ -54,6 +54,18 @@
     return out;
   }
 
+  // Короткий остаток до даты для пилюли: "5д" (≥1 дня) / "7ч" / "<1ч".
+  function daysLeftShort(target) {
+    var d = toDate(target);
+    if (!d) return "";
+    var ms = d.getTime() - now().getTime();
+    if (ms <= 0) return "";
+    var days = Math.floor(ms / DAY);
+    if (days >= 1) return days + "д";
+    var hours = Math.floor(ms / HOUR);
+    return hours >= 1 ? hours + "ч" : "<1ч";
+  }
+
   // Текст таймера с подписью в зависимости от статуса.
   function timerLabel(start, end) {
     var st = statusOf(start, end);
@@ -88,7 +100,7 @@
 
   global.FMT = {
     now: now, toDate: toDate, statusOf: statusOf, progressPct: progressPct,
-    countdown: countdown, timerLabel: timerLabel, fmtDate: fmtDate, fmtRange: fmtRange,
-    freshness: freshness
+    countdown: countdown, daysLeftShort: daysLeftShort, timerLabel: timerLabel,
+    fmtDate: fmtDate, fmtRange: fmtRange, freshness: freshness
   };
 })(window);
