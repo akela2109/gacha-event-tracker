@@ -2,7 +2,7 @@
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-06-18T00:00:00Z",
+  generatedAt: "2026-06-19T00:00:00Z",
   version: "1.1",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness",
   items: [
@@ -11,6 +11,7 @@ window.SNAPSHOT_NTE = {
     { type: "banner", title: "Forsaken Path", subtitle: "Chaos (S) · фаза 2", startsAt: "2026-06-24T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
     { type: "banner", title: "Nocturne Special", subtitle: "Arc-баннер · фаза 1", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-06-24T00:00:00Z" },
     { type: "banner", title: "Pursuit Special", subtitle: "Arc-баннер · фаза 2", startsAt: "2026-06-24T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
+    { type: "event", title: "Everdriving Mystery Box", subtitle: "Коллаб Porsche 918 Spyder · розыгрыш авто", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
     { type: "event", title: "Underground Circuit", subtitle: "Гоночный PvP-режим (коллаб Porsche 918 Spyder)", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
     { type: "event", title: "What's Baking", subtitle: "Ивент приложения Bagel", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
     // Эндгейм-режим. Beyond the Rails: Uncharted Circle завершился 18.06 04:00 UTC+8 (= 17.06 20:00 UTC). Fractured Circle — постоянный контент.
