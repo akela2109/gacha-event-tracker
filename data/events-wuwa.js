@@ -2,7 +2,7 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-06-20T00:00:00Z",
+  generatedAt: "2026-06-21T00:00:00Z",
   version: "3.4",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [

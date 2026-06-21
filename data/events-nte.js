@@ -2,7 +2,7 @@
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-06-20T00:00:00Z",
+  generatedAt: "2026-06-21T00:00:00Z",
   version: "1.1",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness",
   items: [
@@ -17,7 +17,9 @@ window.SNAPSHOT_NTE = {
     { type: "event", title: "The Long Dream", subtitle: "8 мест Лакримосы по городу · ежедневные подсказки", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
     { type: "event", title: "Sunward Travelogue", subtitle: "9 «Странных преданий» на острове Санвард", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
     { type: "event", title: "Hunter's Crucible", subtitle: "Боевой ивент · 7 боссов · награды Annulith", startsAt: "2026-06-18T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
-    // Эндгейм-режим. Beyond the Rails: Uncharted Circle завершился 18.06 04:00 UTC+8 (= 17.06 20:00 UTC). Fractured Circle — постоянный контент.
-    { type: "endgame", title: "Beyond the Rails", subtitle: "Uncharted Circle завершён · Fractured Circle постоянен", startsAt: "2026-06-03T00:00:00Z", endsAt: "2026-06-17T20:00:00Z" }
+    { type: "event", title: "Fight Championship", subtitle: "PvP-режим без оружия · бои вручную (фаза 2)", startsAt: "2026-06-24T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
+    { type: "event", title: "Pixel Surge", subtitle: "Двойные награды за Character Pixels в мини-играх", startsAt: "2026-06-26T00:00:00Z", endsAt: "2026-07-08T00:00:00Z" },
+    // Эндгейм-режим. Uncharted Circle завершился 17.06 20:00 UTC. Special Route — 02.07–16.07 (пересекает версии).
+    { type: "endgame", title: "Beyond the Rails: Special Route", subtitle: "Новый маршрут (выходит за пределы v1.1)", startsAt: "2026-07-02T00:00:00Z", endsAt: "2026-07-16T00:00:00Z" }
   ]
 };
