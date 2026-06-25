@@ -1,8 +1,8 @@
 // Снапшот Wuthering Waves (Kuro Games). У игры нет публичного CORS-API событий,
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-06-23.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-06-25.
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-06-23T00:00:00Z",
+  generatedAt: "2026-06-25T00:00:00Z",
   version: "3.4",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [
