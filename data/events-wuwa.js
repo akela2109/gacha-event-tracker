@@ -2,7 +2,7 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-06-11T00:00:00Z",
+  generatedAt: "2026-06-27T00:00:00Z",
   version: "3.4",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [
@@ -15,7 +15,7 @@ window.SNAPSHOT_WUWA = {
     { type: "event", title: "Gifts of Dreamchasers", subtitle: "Награды за вход", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
     { type: "event", title: "Dream of Azure Sky", subtitle: "Боевой ивент", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
     { type: "event", title: "Sweetdream Tuning", subtitle: "Ивент-головоломка", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Matrix Reform", subtitle: "Боевой вызов", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
+    { type: "event", title: "Matrix Reform", subtitle: "Боевой вызов", startsAt: "2026-06-25T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
     { type: "event", title: "Startorch Racing, Rerun!", subtitle: "Гоночный ивент (реран)", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
     { type: "event", title: "Instant Flashlight", subtitle: "Мини-ивент", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
     // Эндгейм-режимы (повторяющиеся). ToA: сброс Hazard Zone 22.06, цикл 28 дней.
