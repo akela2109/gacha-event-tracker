@@ -2,25 +2,26 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-06-27T00:00:00Z",
-  version: "3.4",
+  generatedAt: "2026-07-04T00:00:00Z",
+  version: "3.5",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [
-    { type: "version", title: "Версия 3.4 «The Dream Not Dreamed»", subtitle: "Коллаб Cyberpunk: Edgerunners", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "banner", title: "Dreaming Upon the Moon (Collab)", subtitle: "Lucy · оружие Spectral Trigger", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "banner", title: "Rekindled Embers of Rage (Collab)", subtitle: "Rebecca · оружие Skull Thrasher", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "banner", title: "Tomorrow in the Frame (Debut)", subtitle: "Lucilla · оружие Freeze Frame", startsAt: "2026-06-13T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "banner", title: "Dance in the Storm's Wake", subtitle: "Cartethyia · оружие Defier's Thorn", startsAt: "2026-06-18T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Night City Roaming", subtitle: "Сюжетный ивент коллаба Edgerunners", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Gifts of Dreamchasers", subtitle: "Награды за вход", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Dream of Azure Sky", subtitle: "Боевой ивент", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Sweetdream Tuning", subtitle: "Ивент-головоломка", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Matrix Reform", subtitle: "Боевой вызов", startsAt: "2026-06-25T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Startorch Racing, Rerun!", subtitle: "Гоночный ивент (реран)", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "event", title: "Instant Flashlight", subtitle: "Мини-ивент", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    // Эндгейм-режимы (повторяющиеся). ToA: сброс Hazard Zone 22.06, цикл 28 дней.
-    { type: "endgame", title: "Tower of Adversity", subtitle: "Hazard Zone · цикл 28 дней", startsAt: "2026-06-22T00:00:00Z", endsAt: "2026-07-20T00:00:00Z" },
-    { type: "endgame", title: "Tactical Holograms", subtitle: "Боссы-голограммы (цикл 3.4)", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" },
-    { type: "endgame", title: "Depths of Illusive Realm", subtitle: "Рогалик-режим (Dreamchasers)", startsAt: "2026-06-08T00:00:00Z", endsAt: "2026-07-09T00:00:00Z" }
+    { type: "version", title: "Версия 3.5 «Blade of Past Resounds, Lingering Dream Hymns»", subtitle: "Новый регион Mengzhou · первый SP-персонаж Yangyang: Xuanling · Xbox-запуск", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    // Фаза 1 (10 июля — ~31 июля)
+    { type: "banner", title: "Yangyang: Xuanling (Дебют)", subtitle: "Yangyang: Xuanling · оружие Azure of Heaven", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-31T00:00:00Z" },
+    { type: "banner", title: "Lynae & Luuk Herssen (Реран · Фаза 1)", subtitle: "Lynae · Luuk Herssen (реран)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-31T00:00:00Z" },
+    // Фаза 2 (~31 июля — 19 августа)
+    { type: "banner", title: "Suisui (Дебют)", subtitle: "Suisui · оружие Firstlight's Herald", startsAt: "2026-07-31T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "banner", title: "Aemeath (Реран · Фаза 2)", subtitle: "Aemeath (реран)", startsAt: "2026-07-31T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    // Special Rerun — весь патч
+    { type: "banner", title: "Special Rerun Banner", subtitle: "Jiyan · Yinlin · Jinhsi · Changli · Zhezhi · Xiangli Yao + фирменные оружия", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    // Ивенты 3.5. Точные внутрипатчевые даты уточняются после запуска 10 июля.
+    { type: "event", title: "Virtual Crisis: Quadrant Trials", subtitle: "Боевое испытание: выбор эффектов-усилителей врагов", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "event", title: "Lament Recon: Tacet Crisis", subtitle: "Режим «Vampire Survivors» — отражение волн врагов", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "event", title: "Escape from Duckov", subtitle: "Коллаб-ивент с байком", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    // Эндгейм-режимы. ToA: следующий сброс 20.07, цикл 28 дней.
+    { type: "endgame", title: "Tower of Adversity", subtitle: "Hazard Zone · цикл 28 дней", startsAt: "2026-07-20T00:00:00Z", endsAt: "2026-08-17T00:00:00Z" },
+    { type: "endgame", title: "Tactical Holograms", subtitle: "Боссы-голограммы (цикл 3.5)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "endgame", title: "Depths of Illusive Realm", subtitle: "Рогалик-режим (цикл 3.5)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" }
   ]
 };
