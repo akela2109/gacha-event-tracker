@@ -2,7 +2,7 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-07-05T00:00:00Z",
+  generatedAt: "2026-07-06T00:00:00Z",
   version: "3.5",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [
@@ -22,6 +22,7 @@ window.SNAPSHOT_WUWA = {
     { type: "event", title: "A Glimpse of Xuanfang", subtitle: "Исследование нового региона Mengzhou / Xuanfang Hold", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     { type: "event", title: "Lollo Campaign: New Journey", subtitle: "Ежедневные квесты и логин-ивент Lollo Logistics", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     { type: "event", title: "Gifts of Aftertune", subtitle: "Логин-награды: +10 вытягиваний за вход в течение патча", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "event", title: "Shape of Yesterday", subtitle: "Фотографирование видов Mengzhou в заданных точках · 180 Astrite за прохождение", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     // Эндгейм-режимы. ToA: следующий сброс 20.07, цикл 28 дней.
     { type: "endgame", title: "Tower of Adversity", subtitle: "Hazard Zone · цикл 28 дней", startsAt: "2026-07-20T00:00:00Z", endsAt: "2026-08-17T00:00:00Z" },
     { type: "endgame", title: "Tactical Holograms", subtitle: "Denia — первый босс-голограмма цикла 3.5 · Xuanfang Hold", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
