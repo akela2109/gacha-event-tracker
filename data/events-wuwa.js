@@ -2,13 +2,13 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-07-06T00:00:00Z",
+  generatedAt: "2026-07-07T00:00:00Z",
   version: "3.5",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [
     { type: "version", title: "Версия 3.5 «Blade of Past Resounds, Lingering Dream Hymns»", subtitle: "Новый регион Mengzhou · первый SP-персонаж Yangyang: Xuanling · Xbox-запуск", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     // Фаза 1 (10 июля — 31 июля)
-    { type: "banner", title: "Yangyang: Xuanling (Дебют)", subtitle: "Yangyang: Xuanling · оружие Azure of Heaven", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-31T00:00:00Z" },
+    { type: "banner", title: "Yangyang: Xuanling (Дебют)", subtitle: "Yangyang: Xuanling · оружие Azure Oath", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-31T00:00:00Z" },
     { type: "banner", title: "Lynae & Luuk Herssen (Реран · Фаза 1)", subtitle: "Lynae · Luuk Herssen (реран)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-31T00:00:00Z" },
     // Фаза 2 (~31 июля — 19 августа)
     { type: "banner", title: "Suisui (Дебют)", subtitle: "Suisui · оружие Firstlight's Herald", startsAt: "2026-07-31T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
