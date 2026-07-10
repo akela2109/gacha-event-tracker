@@ -2,7 +2,7 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-07-09T00:00:00Z",
+  generatedAt: "2026-07-10T00:00:00Z",
   version: "3.5",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg",
   items: [
@@ -14,7 +14,7 @@ window.SNAPSHOT_WUWA = {
     { type: "banner", title: "Suisui (Дебют)", subtitle: "Suisui · оружие Firstlight's Herald", startsAt: "2026-07-31T00:00:00Z", endsAt: "2026-08-20T00:00:00Z" },
     { type: "banner", title: "Aemeath (Реран · Фаза 2)", subtitle: "Aemeath (реран)", startsAt: "2026-07-31T00:00:00Z", endsAt: "2026-08-20T00:00:00Z" },
     // Special Selector Banners — весь патч
-    { type: "banner", title: "Starpath Reverbs (Резонатор-Селектор)", subtitle: "Выбор одного персонажа: Jiyan · Yinlin · Jinhsi · Changli · Zhezhi · Xiangli Yao", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-20T00:00:00Z" },
+    { type: "banner", title: "Starpath Reverbs (Резонатор-Селектор)", subtitle: "Выбор одного персонажа: Jiyan · Yinlin · Jinhsi · Changli · Zhezhi · Xiangli Yao", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     { type: "banner", title: "Tideforge Reverbs (Оружие-Селектор)", subtitle: "Выбор фирменного оружия персонажей из Starpath Reverbs", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-20T00:00:00Z" },
     // Ивенты 3.5
     { type: "event", title: "Virtual Crisis: Quadrant Trials", subtitle: "Боевое испытание: выбор эффектов-усилителей врагов", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-20T00:00:00Z" },
