@@ -2,63 +2,97 @@
 // Сырой вид api.ennead.cc/mihoyo/starrail/calendar — время в Unix-секундах.
 // Тот же нормализатор (sources.js) обрабатывает и снапшот, и живой ответ API.
 // Обновить: попросить Claude перескрейпить, либо страница сама подтянет live.
+// Важно: live-API отдаёт events:[] в первые дни патча (проверено 15.07.2026, версия 4.4).
+// Поэтому ивенты держим здесь вручную — app.js подмешивает их, если live-ответ пуст.
+// Источники ивентов 4.4: game8.co/games/Honkai-Star-Rail · honkai-star-rail.fandom.com/wiki/Version/4.4
 window.SNAPSHOT_HSR = {
-  "generatedAt": "2026-06-11T00:00:00Z",
-  "source": "api.ennead.cc/mihoyo/starrail/calendar",
+  "generatedAt": "2026-07-15T00:00:00Z",
+  "version": "4.4",
+  "source": "api.ennead.cc/mihoyo/starrail/calendar · game8.co · fandom (ивенты 4.4)",
   "raw": {
     "events": [
       {
+        "name": "Antigraft Brickbuster",
+        "type_name": "ActivityTypeOther",
+        "start_time": 1784073600,
+        "end_time": 1787702400,
+        "image_url": null,
+        "description": "Игровой ивент версии 4.4.",
+        "special_reward": null
+      },
+      {
+        "name": "Fate/Star Rail Night",
+        "type_name": "ActivityTypeOther",
+        "start_time": 1784851200,
+        "end_time": 1787702400,
+        "image_url": null,
+        "description": "Основной ивент коллаборации с Fate.",
+        "special_reward": null
+      },
+      {
+        "name": "Fate Gift",
+        "type_name": "ActivityTypeOther",
+        "start_time": 1784073600,
+        "end_time": 1787702400,
+        "image_url": null,
+        "description": "Награда — конус света Gilgamesh или Archer.",
+        "special_reward": {
+          "name": "Light Cone (Gilgamesh / Archer)",
+          "amount": 1
+        }
+      },
+      {
         "name": "Gift of Odyssey",
         "type_name": "ActivityTypeSign",
-        "start_time": 1780196400,
-        "end_time": 1783997999,
+        "start_time": 1784073600,
+        "end_time": 1787616000,
         "image_url": null,
-        "description": "",
+        "description": "Логин-ивент: 7 дней входа.",
         "special_reward": {
           "name": "Star Rail Special Pass",
           "amount": 10
         }
       },
       {
-        "name": "Pixel Plane Rumble",
-        "type_name": "ActivityTypeOther",
-        "start_time": 1780196400,
-        "end_time": 1784059199,
+        "name": "Free Gilgamesh or Archer",
+        "type_name": "ActivityTypeSign",
+        "start_time": 1784851200,
+        "end_time": null,
         "image_url": null,
-        "description": "A classic game returns to the arcadian skies as pixel planes take flight once again. In a fierce dogfight between ninety-nine fighters, only the final victor can claim air superiority... Customize your ultimate aircraft, devise a winning strategy, and break through the bullet hell!",
+        "description": "Логин-ивент коллаба Fate: бесплатный 5★ на выбор. Конец — «до конца версии 4.6», точная дата не объявлена.",
         "special_reward": {
-          "name": "Stellar Jade",
-          "amount": 1240
+          "name": "5★ персонаж на выбор",
+          "amount": 1
+        }
+      },
+      {
+        "name": "Stellar Companion",
+        "type_name": "ActivityTypeSign",
+        "start_time": 1776816000,
+        "end_time": 1787702400,
+        "image_url": null,
+        "description": "Долгий логин-ивент (идёт с 4.2): бесплатный 5★ Golden Companion Spirit.",
+        "special_reward": {
+          "name": "Golden Companion Spirit",
+          "amount": 1
         }
       },
       {
         "name": "Planar Fissure",
         "type_name": "ActivityTypeDouble",
-        "start_time": 1781665200,
-        "end_time": 1782701999,
+        "start_time": 1785110400,
+        "end_time": 1786320000,
         "image_url": null,
-        "description": "During the event, successfully challenge Simulated Universe or Divergent Universe to earn double Planar Ornaments rewards.",
+        "description": "Двойные Planar Ornaments в Simulated / Divergent Universe.",
         "special_reward": null
       },
       {
-        "name": "Wispae Amusement Park",
-        "type_name": "ActivityTypeOther",
-        "start_time": 1782298800,
-        "end_time": 1784059199,
-        "image_url": null,
-        "description": "Trendy styles change in the blink of an eye, bringing an opportunity for Star Rail FEST's renewal. Plan out the routes, cleverly arrange the facilities, and build an exclusive arcadia for the wispae in the World in Canvas! Your creative concepts will serve as the perfect inspiration for optimizing the Exhibition Area.",
-        "special_reward": {
-          "name": "Stellar Jade",
-          "amount": 500
-        }
-      },
-      {
-        "name": "Realm of the Strange",
+        "name": "Garden of Plenty",
         "type_name": "ActivityTypeDouble",
-        "start_time": 1783047600,
-        "end_time": 1783911599,
+        "start_time": 1786665600,
+        "end_time": 1787529600,
         "image_url": null,
-        "description": "During the event, successfully challenge Caverns of Corrosion to earn double rewards.",
+        "description": "Двойные награды в Calyx.",
         "special_reward": null
       }
     ],

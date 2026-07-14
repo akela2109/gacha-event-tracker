@@ -305,8 +305,16 @@
       render(); renderGameHero();
     });
   }
+  // Мёрж по категориям, а не «live затирает всё». Причина: api.ennead.cc в первые дни
+  // патча отдаёт events:[] (проверено на HSR 4.4, 15.07.2026) — при полной замене дорожка
+  // ивентов обнулялась. Live выигрывает только в тех категориях, где реально что-то вернул;
+  // пустые категории остаются на снапшоте.
   function mergeLive(game, liveItems) {
-    state.items = state.items.filter(function (it) { return it.game !== game; }).concat(liveItems);
+    var liveCats = {};
+    liveItems.forEach(function (it) { liveCats[catOf(it.type)] = true; });
+    state.items = state.items.filter(function (it) {
+      return it.game !== game || !liveCats[catOf(it.type)];
+    }).concat(liveItems);
     state.live[game] = true;
   }
 
