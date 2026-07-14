@@ -4,6 +4,7 @@
 
   var SITE_URL = "https://akela2109.github.io/gacha-event-tracker/";
   var SHORT_URL = "https://is.gd/ee6QPc";
+  var t = function (k) { return window.I18N ? window.I18N.t(k) : k; };
 
   var btn = document.getElementById("shareBtn");
   if (!btn) return;
@@ -16,13 +17,13 @@
     el.className = "share-pop";
     el.hidden = true;
     el.innerHTML =
-      '<div class="share-pop__title">Поделиться трекером</div>' +
+      '<div class="share-pop__title">' + t("shareTitle") + '</div>' +
       '<div class="share-pop__row">' +
       '  <input class="share-pop__link" type="text" readonly value="' + SHORT_URL + '" aria-label="Ссылка" />' +
-      '  <button class="share-pop__copy" type="button">Копировать</button>' +
+      '  <button class="share-pop__copy" type="button">' + t("shareCopy") + '</button>' +
       '</div>' +
       '<img class="share-pop__qr" src="qr.png" alt="QR-код ссылки на трекер" width="180" height="180" />' +
-      '<div class="share-pop__hint">Наведи камеру телефона на QR — откроется сайт</div>';
+      '<div class="share-pop__hint">' + t("shareHint") + '</div>';
     document.body.appendChild(el);
 
     var input = el.querySelector(".share-pop__link");
@@ -30,8 +31,8 @@
 
     copyBtn.addEventListener("click", function () {
       copyText(SHORT_URL, input);
-      copyBtn.textContent = "Скопировано ✓";
-      setTimeout(function () { copyBtn.textContent = "Копировать"; }, 1600);
+      copyBtn.textContent = t("shareCopied");
+      setTimeout(function () { copyBtn.textContent = t("shareCopy"); }, 1600);
     });
 
     return el;
@@ -89,8 +90,10 @@
   }
 
   btn.addEventListener("click", function () {
-    // На устройствах с нативным share (в основном мобильные) — системное окно.
-    if (navigator.share) {
+    // Нативный share — только на тач-устройствах (мобильные). На десктопе — свой QR-поповер,
+    // иначе Windows-браузер открыл бы системную «шторку» вместо нашего окна.
+    var isTouch = window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+    if (navigator.share && isTouch) {
       navigator.share({
         title: "Gacha Event Tracker",
         text: "Календарь событий Genshin · Star Rail · WuWa · NTE",
@@ -99,5 +102,11 @@
       return;
     }
     if (pop && !pop.hidden) closePopover(); else openPopover();
+  });
+
+  // Смена языка: сбросить поповер, чтобы он пересобрался с новыми подписями.
+  document.addEventListener("langchange", function () {
+    closePopover();
+    if (pop) { pop.remove(); pop = null; }
   });
 })();

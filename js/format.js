@@ -5,6 +5,9 @@
   var DAY = 86400000, HOUR = 3600000, MIN = 60000;
   var ENDING_SOON_MS = 48 * HOUR; // "скоро закончится" — менее 48 часов
 
+  // Локализация: читаем строки/массивы из I18N в момент вызова (фолбэк — сам ключ).
+  function t(k) { return global.I18N ? global.I18N.t(k) : k; }
+
   function now() { return new Date(); }
 
   // Парсинг: принимает ISO-строку, Unix-секунды (число) или null. Возвращает Date|null.
@@ -48,9 +51,9 @@
     var hours = Math.floor((ms % DAY) / HOUR);
     var mins = Math.floor((ms % HOUR) / MIN);
     var out;
-    if (days > 0) out = days + "д " + hours + "ч";
-    else if (hours > 0) out = hours + "ч " + mins + "м";
-    else out = mins + "м";
+    if (days > 0) out = days + t("unitDay") + " " + hours + t("unitHour");
+    else if (hours > 0) out = hours + t("unitHour") + " " + mins + t("unitMin");
+    else out = mins + t("unitMin");
     return out;
   }
 
@@ -61,30 +64,29 @@
     var ms = d.getTime() - now().getTime();
     if (ms <= 0) return "";
     var days = Math.floor(ms / DAY);
-    if (days >= 1) return days + "д";
+    if (days >= 1) return days + t("unitDay");
     var hours = Math.floor(ms / HOUR);
-    return hours >= 1 ? hours + "ч" : "<1ч";
+    return hours >= 1 ? hours + t("unitHour") : t("lessHour");
   }
 
   // Текст таймера с подписью в зависимости от статуса.
   function timerLabel(start, end) {
     var st = statusOf(start, end);
-    if (st === "upcoming") return "старт через " + countdown(start);
-    if (st === "active" || st === "ending-soon") return "ещё " + countdown(end);
-    if (st === "ended") return "завершено";
-    return "дата неизвестна";
+    if (st === "upcoming") return t("startsIn") + countdown(start);
+    if (st === "active" || st === "ending-soon") return t("remains") + countdown(end);
+    if (st === "ended") return t("ended");
+    return t("unknownDate");
   }
 
-  var MONTHS = ["янв", "фев", "мар", "апр", "мая", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"];
   function fmtDate(v) {
     var d = toDate(v);
-    if (!d) return "TBA";
-    return d.getUTCDate() + " " + MONTHS[d.getUTCMonth()];
+    if (!d) return t("tba");
+    return d.getUTCDate() + " " + t("monthsShort")[d.getUTCMonth()];
   }
   function fmtRange(start, end) {
     var s = fmtDate(start), e = end ? fmtDate(end) : null;
-    if (s === "TBA" && !e) return "Дата уточняется";
-    if (!e) return "с " + s;
+    if (s === t("tba") && !e) return t("dateTbd");
+    if (!e) return t("fromPrefix") + s;
     return s + " — " + e;
   }
 
@@ -94,8 +96,8 @@
     if (!d) return { text: "", stale: false };
     var ms = now().getTime() - d.getTime();
     var days = Math.floor(ms / DAY);
-    var text = days <= 0 ? "сегодня" : days === 1 ? "вчера" : days + " дн. назад";
-    return { text: "снапшот: " + text, stale: days > 5 };
+    var text = days <= 0 ? t("freshToday") : days === 1 ? t("freshYesterday") : days + t("freshDaysAgo");
+    return { text: t("freshPrefix") + text, stale: days > 5 };
   }
 
   global.FMT = {

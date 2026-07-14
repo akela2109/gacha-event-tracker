@@ -15,12 +15,11 @@
   var TYPE_CAT = {};
   CATS.forEach(function (c) { c.types.forEach(function (t) { TYPE_CAT[t] = c.key; }); });
   function catOf(type) { return TYPE_CAT[type] || "event"; }
-  var TYPE_LABEL = { banner: "Баннер", event: "Ивент", endgame: "Эндгейм", version: "Версия", maintenance: "Тех. работы" };
+  var I18N = window.I18N;
 
   // Режим отображения: SOLO (одна игра) меняет масштаб строк/полос.
   var SOLO = false, STEP = 30, BAR_H = 24;
   var DAY_PX = 30;                                  // ширина одного дня (px) → ширина полотна и скролл
-  var WD = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]; // дни недели (RU), индекс = getDay()
   var didScroll = false;                            // авто-скролл к «сегодня» — только при первой отрисовке
 
   var state = {
@@ -44,7 +43,6 @@
   }
   var WIN = buildWindow();
   function pct(t) { return ((t - WIN.start) / WIN.len) * 100; }
-  var MONTHS_FULL = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
 
   // ---------- Фильтры ----------
   function passesType(it) {
@@ -127,8 +125,9 @@
   function axisHTML() {
     var h = "";
     // подписи месяцев у начала своего месяца (лево-выравнивание)
-    h += '<div class="axis-month" style="left:' + pct(WIN.start) + '%">' + MONTHS_FULL[WIN.m1.getMonth()] + " " + WIN.m1.getFullYear() + '</div>';
-    h += '<div class="axis-month" style="left:' + pct(WIN.nextMonth) + '%">' + MONTHS_FULL[WIN.m2.getMonth()] + " " + WIN.m2.getFullYear() + '</div>';
+    var monthsFull = I18N.t("monthsFull");
+    h += '<div class="axis-month" style="left:' + pct(WIN.start) + '%">' + monthsFull[WIN.m1.getMonth()] + " " + WIN.m1.getFullYear() + '</div>';
+    h += '<div class="axis-month" style="left:' + pct(WIN.nextMonth) + '%">' + monthsFull[WIN.m2.getMonth()] + " " + WIN.m2.getFullYear() + '</div>';
     // граница месяцев
     h += '<div class="axis-monthline" style="left:' + pct(WIN.nextMonth) + '%"></div>';
     // по дню: день недели + число
@@ -142,7 +141,7 @@
       if (wd === 0 || wd === 6) cls += " is-weekend";
       if (dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDate() === todayKey) cls += " is-today";
       h += '<div class="' + cls + '" style="left:' + pct(dt.getTime()) + '%">' +
-        '<span class="axis-day__wd">' + WD[wd] + '</span>' +
+        '<span class="axis-day__wd">' + I18N.t("weekdays")[wd] + '</span>' +
         '<span class="axis-day__d">' + dt.getDate() + '</span></div>';
     }
     return h;
@@ -203,7 +202,7 @@
     if (!data.cats.length) {
       catRows = '<div class="cat-row"><div class="cat-row__label"></div>' +
         '<div class="cat-row__track" style="height:' + (BAR_H + 12) + 'px;' + gridBgStyle() + '">' +
-          today + '<div class="lane-empty">нет событий в этом окне</div></div></div>';
+          today + '<div class="lane-empty">' + esc(I18N.t("laneEmpty")) + '</div></div></div>';
     } else {
       catRows = data.cats.map(function (c) {
         var bars = "";
@@ -212,7 +211,7 @@
         });
         var trackH = Math.max(c.rows.length * STEP + 6, BAR_H + 12);
         return '<div class="cat-row" data-cat="' + c.meta.key + '">' +
-          '<div class="cat-row__label"><span class="cat-ic">' + c.meta.icon + '</span>' + esc(c.meta.label) + '</div>' +
+          '<div class="cat-row__label"><span class="cat-ic">' + c.meta.icon + '</span>' + esc(I18N.t("cat." + c.meta.key)) + '</div>' +
           '<div class="cat-row__track" style="height:' + trackH + 'px;' + gridBgStyle() + '">' +
             today + bars +
           '</div></div>';
@@ -275,7 +274,7 @@
     var meta = SOURCES.snapshotMeta();
     badges.innerHTML = activeGames().map(function (g) {
       if (state.live[g]) {
-        return '<span class="fresh" data-src="live"><span class="dot"></span>' + esc(SOURCES.GAMES[g].short) + ': live</span>';
+        return '<span class="fresh" data-src="live"><span class="dot"></span>' + esc(SOURCES.GAMES[g].short) + ': ' + esc(I18N.t("badgeLive")) + '</span>';
       }
       var fr = FMT.freshness(meta[g]);
       return '<span class="fresh' + (fr.stale ? " is-stale" : "") + '" data-src="snapshot"><span class="dot"></span>' +
@@ -284,8 +283,15 @@
   }
 
   // ---------- Live-фетч ----------
+  var liveKey = "liveDefault"; // текущий ключ статуса live (для ретрансляции при смене языка)
+  function setLiveStatus(key, st) {
+    liveKey = key;
+    liveStatus.textContent = I18N.t(key);
+    liveStatus.dataset.state = st;
+  }
+
   function loadLive() {
-    liveStatus.textContent = "загрузка…"; liveStatus.dataset.state = "loading";
+    setLiveStatus("liveLoading", "loading");
     refreshBtn.disabled = true;
     var jobs = SOURCES.liveGames.map(function (g) {
       return SOURCES.fetchLive(g)
@@ -294,8 +300,7 @@
     });
     Promise.all(jobs).then(function (oks) {
       var any = oks.some(Boolean);
-      liveStatus.textContent = any ? "live ✓" : "снапшот (offline)";
-      liveStatus.dataset.state = any ? "live" : "error";
+      setLiveStatus(any ? "liveOk" : "liveOffline", any ? "live" : "error");
       refreshBtn.disabled = false;
       render(); renderGameHero();
     });
@@ -319,12 +324,12 @@
     var g = state.filters.game;
     if (g === "all") {
       hero.hidden = true;
-      if (title) { title.hidden = false; title.textContent = "Сводка — все игры"; }
+      if (title) { title.hidden = false; title.textContent = I18N.t("viewTitle"); }
       return;
     }
     if (title) title.hidden = true;
     var info = SOURCES.GAMES[g], ver = gameVersion(g), meta = SOURCES.snapshotMeta();
-    var fresh = state.live[g] ? "live ✓" : (FMT.freshness(meta[g]).text || "");
+    var fresh = state.live[g] ? I18N.t("liveOk") : (FMT.freshness(meta[g]).text || "");
     hero.dataset.game = g;
     hero.innerHTML =
       '<div class="game-hero__main"><span class="game-hero__dot"></span>' +
@@ -348,7 +353,7 @@
       }
       return '<div class="code" data-game="' + c.game + '">' +
         '<div class="code__head"><span class="code__str">' + esc(c.code) + '</span>' +
-        '<button class="code__copy" data-code="' + esc(c.code) + '">копировать</button></div>' +
+        '<button class="code__copy" data-code="' + esc(c.code) + '">' + esc(I18N.t("copy")) + '</button></div>' +
         '<div class="code__reward">' + esc(c.reward) + '</div>' +
         '<div class="code__game">' + esc(SOURCES.GAMES[c.game].short) + '</div></div>';
     }).join("");
@@ -363,7 +368,7 @@
         return '<div class="tip-part">🎴 ' + esc(p) + '</div>'; }).join("") + '</div>';
     }
     tip.innerHTML = '<span class="tip-game" style="color:var(--g-' + d.game + ')">' + esc(SOURCES.GAMES[d.game].short) + '</span>' +
-      (TYPE_LABEL[d.type] ? '<span class="tip-type">' + esc(TYPE_LABEL[d.type]) + '</span>' : '') +
+      '<span class="tip-type">' + esc(I18N.t("typeLabel." + d.type)) + '</span>' +
       '<b>' + esc(d.title) + '</b>' +
       (d.sub ? '<div class="tip-row">' + esc(d.sub) + '</div>' : '') +
       partsHTML +
@@ -409,15 +414,29 @@
   function wireCopy() {
     $("#codesList").addEventListener("click", function (e) {
       var btn = e.target.closest(".code__copy"); if (!btn) return;
-      var done = function () { btn.textContent = "скопировано ✓"; btn.classList.add("copied");
-        setTimeout(function () { btn.textContent = "копировать"; btn.classList.remove("copied"); }, 1600); };
+      var done = function () { btn.textContent = I18N.t("copied"); btn.classList.add("copied");
+        setTimeout(function () { btn.textContent = I18N.t("copy"); btn.classList.remove("copied"); }, 1600); };
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(btn.dataset.code).then(done, done);
       else done();
     });
   }
 
+  function wireLang() {
+    var langBtn = $("#langBtn");
+    if (!langBtn) return;
+    var updateBtn = function () { langBtn.textContent = I18N.lang === "ru" ? "EN" : "RU"; };
+    updateBtn();
+    langBtn.addEventListener("click", function () {
+      I18N.set(I18N.lang === "ru" ? "en" : "ru"); // сохранить + перевести статику + событие langchange
+      updateBtn();
+      liveStatus.textContent = I18N.t(liveKey);   // ретрансляция текущего live-статуса
+      render(); renderCodes(); renderGameHero();  // перерисовать динамику на новом языке
+    });
+  }
+
   function init() {
-    wireFilters(); wireTip(); wireCopy();
+    I18N.apply();                    // перевести статичный HTML под сохранённый язык
+    wireFilters(); wireTip(); wireCopy(); wireLang();
     renderCodes(); render(); renderGameHero();
     refreshBtn.addEventListener("click", loadLive);
     loadLive();
