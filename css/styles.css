@@ -88,6 +88,10 @@ body {
 #gameFilters .tab[data-game="nte"].is-active::after { background: var(--g-nte); }
 
 /* ---- View title / game hero ---- */
+/* Свой display в правиле ниже перебивает браузерное [hidden] { display: none },
+   поэтому в режиме «Все игры» шапка оставалась видимой пустой полосой
+   (с содержимым той игры, с которой ушли). Явно гасим скрытые элементы. */
+[hidden] { display: none !important; }
 .view-title { font-size: 16px; font-weight: 700; color: var(--txt-dim); margin: 4px 0 14px; }
 .game-hero { display: flex; align-items: center; justify-content: space-between; gap: 14px;
   margin: 4px 0 16px; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line);
