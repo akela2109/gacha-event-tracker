@@ -33,6 +33,11 @@
     var five = pools.filter(function (x) { return Number(x.rarity) === 5 && x.icon; })[0] || pools.filter(function (x) { return x.icon; })[0];
     return five ? five.icon : null;
   }
+  // HoYo-API для событий с необъявленными датами шлёт 0, а не null (Genshin 6.7:
+  // Ley Line Overflow, Heated Battle Mode...). Без этого 0 превращался бы в 1970 год,
+  // и событие молча выпадало из окна таймлайна вместо попадания в TBA.
+  function ts(v) { return v ? v : null; }
+
   function rewardText(ev) {
     if (!ev.special_reward) return "";
     var r = ev.special_reward;
@@ -76,14 +81,14 @@
       out.push({ game: game, type: canon ? "endgame" : "event",
         title: canon || e.name,
         subtitle: canon && canon !== e.name ? e.name : rewardText(e),
-        startsAt: e.start_time, endsAt: e.end_time, image: e.image_url || null,
+        startsAt: ts(e.start_time), endsAt: ts(e.end_time), image: e.image_url || null,
         url: null, source: source, description: e.description || "" });
     });
     (raw.banners || []).forEach(function (b) {
       var ver = b.version ? "Версия " + b.version : "";
       out.push({ game: game, type: "banner",
         title: featured5(b) || b.name || "Баннер", subtitle: ver,
-        startsAt: b.start_time, endsAt: b.end_time, image: firstIcon(b),
+        startsAt: ts(b.start_time), endsAt: ts(b.end_time), image: firstIcon(b),
         url: null, source: source, description: "" });
     });
     // challenges — это и есть повторяющиеся эндгейм-режимы; каноним имя по type_name.
@@ -92,7 +97,7 @@
       out.push({ game: game, type: "endgame",
         title: canon,
         subtitle: canon !== c.name ? c.name : rewardText(c),
-        startsAt: c.start_time, endsAt: c.end_time, image: null,
+        startsAt: ts(c.start_time), endsAt: ts(c.end_time), image: null,
         url: null, source: source, description: "Боевой режим / испытание" });
     });
     return out;

@@ -309,7 +309,31 @@
   // патча отдаёт events:[] (проверено на HSR 4.4, 15.07.2026) — при полной замене дорожка
   // ивентов обнулялась. Live выигрывает только в тех категориях, где реально что-то вернул;
   // пустые категории остаются на снапшоте.
+  // Ключ для сопоставления живого события со снапшотным.
+  function itemKey(it) { return it.type + "|" + String(it.title || "").trim().toLowerCase(); }
+
   function mergeLive(game, liveItems) {
+    // Шаг 1: у части живых событий даты приходят пустыми (Genshin 6.7: Ley Line Overflow,
+    // Dance Dance Easy-Breezy Disco и др. — start_time = 0/null). Даты для них лежат
+    // в снапшоте, вбитые вручную; переносим их на живой объект, иначе полосы не рисуются.
+    var snapByKey = {};
+    state.items.forEach(function (it) {
+      if (it.game === game && it.startsAt != null) snapByKey[itemKey(it)] = it;
+    });
+    liveItems = liveItems.map(function (it) {
+      if (it.startsAt != null) return it;
+      var s = snapByKey[itemKey(it)];
+      if (!s) return it;
+      var copy = {};
+      for (var k in it) { if (Object.prototype.hasOwnProperty.call(it, k)) copy[k] = it[k]; }
+      copy.startsAt = s.startsAt;
+      copy.endsAt = s.endsAt;
+      return copy;
+    });
+
+    // Шаг 2: мёрж по категориям, а не «live затирает всё». Причина: api.ennead.cc в первые
+    // дни патча отдаёт events:[] (проверено на HSR 4.4, 15.07.2026) — при полной замене
+    // дорожка ивентов обнулялась. Live выигрывает только там, где реально что-то вернул.
     var liveCats = {};
     liveItems.forEach(function (it) { liveCats[catOf(it.type)] = true; });
     state.items = state.items.filter(function (it) {
