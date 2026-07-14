@@ -13,11 +13,13 @@
   --radius: 16px;
   --shadow: 0 8px 30px rgba(0, 0, 0, .35);
 
-  /* акценты по играм */
-  --g-genshin: #4fc3f7; /* синий */
-  --g-hsr: #b07cff;     /* фиолетовый */
-  --g-wuwa: #ffd166;    /* жёлтый */
-  --g-nte: #ff6b9d;     /* розовый */
+  /* Акценты по играм — от фирменных цветов, но адаптированы под тёмную тему:
+     цвет игры служит фоном полос таймлайна с тёмным текстом, поэтому обязан быть светлым
+     (родной космический синий HSR #142136 и чёрный фон WuWa для этого непригодны). */
+  --g-genshin: #6FD5B8; /* бирюза — элементный Anemo */
+  --g-hsr: #A78BFA;     /* звёздная лаванда — свечение из ключевого арта */
+  --g-wuwa: #4FA8F0;    /* резонансный голубой — вторичный цвет Kuro (#3C8BE7), осветлён */
+  --g-nte: #FD61A8;     /* неоновая фуксия — точный брендовый цвет с nte.perfectworld.com */
 
   --st-active: #3ddc97;
   --st-soon: #ff8c5a;
@@ -68,9 +70,10 @@ body {
   background: var(--card); border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px; transition: .15s; }
 .chip:hover { color: var(--txt); border-color: #3a445f; }
 .chip.is-active { color: #0c0e16; background: var(--accent); border-color: var(--accent); }
-#gameFilters .chip[data-game="genshin"].is-active { background: var(--g-genshin); border-color: var(--g-genshin); color: #06121f; }
-#gameFilters .chip[data-game="hsr"].is-active { background: var(--g-hsr); border-color: var(--g-hsr); color: #120a23; }
-#gameFilters .chip[data-game="wuwa"].is-active { background: var(--g-wuwa); border-color: var(--g-wuwa); color: #241c02; }
+/* Текст активного чипа — затемнённый оттенок самого цвета игры, а не общий тёмный. */
+#gameFilters .chip[data-game="genshin"].is-active { background: var(--g-genshin); border-color: var(--g-genshin); color: #06231c; }
+#gameFilters .chip[data-game="hsr"].is-active { background: var(--g-hsr); border-color: var(--g-hsr); color: #150a2e; }
+#gameFilters .chip[data-game="wuwa"].is-active { background: var(--g-wuwa); border-color: var(--g-wuwa); color: #04192b; }
 #gameFilters .chip[data-game="nte"].is-active { background: var(--g-nte); border-color: var(--g-nte); color: #2a0a17; }
 
 /* ---- Tabs (вкладки по играм) ---- */
