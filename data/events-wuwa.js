@@ -30,7 +30,6 @@ window.SNAPSHOT_WUWA = {
     // --- Эндгейм-режимы (повторяющиеся) ---
     // ToA: цикл 28 дней. Прошлый сброс 22.06 → следующий ~20.07.
     { type: "endgame", title: "Tower of Adversity", subtitle: "Hazard Zone · цикл 28 дней", startsAt: "2026-07-20T00:00:00Z", endsAt: "2026-08-17T00:00:00Z" },
-    { type: "endgame", title: "Tactical Holograms", subtitle: "Боссы-голограммы (цикл 3.5)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
-    { type: "endgame", title: "Depths of Illusive Realm", subtitle: "Рогалик-режим (цикл 3.5)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" }
+    { type: "endgame", title: "Tactical Holograms", subtitle: "Боссы-голограммы (цикл 3.5) + Denia (новый)", startsAt: "2026-07-11T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" }
   ]
 };

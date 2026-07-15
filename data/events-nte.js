@@ -13,8 +13,8 @@ window.SNAPSHOT_NTE = {
     { type: "banner", title: "Resolve Special Arc", subtitle: "Blushing Mirage (S-Arc) · фаза 1", startsAt: "2026-07-08T00:00:00Z", endsAt: "2026-07-29T00:00:00Z" },
     // --- Ивенты ---
     { type: "event", title: "Stamina Recharge", subtitle: "Ивент энергии", startsAt: "2026-07-13T00:00:00Z", endsAt: "2026-07-20T00:00:00Z" },
-    { type: "event", title: "Gold Clash", subtitle: "x2 Fons в Pink Paws Heist", startsAt: "2026-07-18T00:00:00Z", endsAt: "2026-08-01T00:00:00Z" },
+    { type: "event", title: "Gold Clash", subtitle: "x2 Fons в Pink Paws Heist", startsAt: "2026-07-20T00:00:00Z", endsAt: "2026-08-03T00:00:00Z" },
     // --- Эндгейм-режим (повторяющийся, привязан к версии) ---
-    { type: "endgame", title: "Prime Circle", subtitle: "Beyond the Rails · цикл 1.2", startsAt: "2026-07-07T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" }
+    { type: "endgame", title: "Beyond the Rails", subtitle: "14-дн. ротации: Blazing → Cresting → Waxing Circle", startsAt: "2026-07-07T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" }
   ]
 };
