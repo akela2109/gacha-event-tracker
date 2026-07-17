@@ -2,7 +2,7 @@
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-07-16T00:00:00Z",
+  generatedAt: "2026-07-17T00:00:00Z",
   version: "1.2",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
   items: [
@@ -17,6 +17,7 @@ window.SNAPSHOT_NTE = {
     { type: "event", title: "Circle Gift", subtitle: "7-дневный логин-ивент · до 10 Solid Dice", startsAt: "2026-07-08T00:00:00Z", endsAt: "2026-07-15T00:00:00Z" },
     { type: "event", title: "Resolve Perks", subtitle: "Косметический ивент к баннеру Shinku", startsAt: "2026-07-08T00:00:00Z", endsAt: "2026-07-29T00:00:00Z" },
     { type: "event", title: "Mews Flash", subtitle: "Скретч-карты за Fons у Midnight Catzebo · весь патч", startsAt: "2026-07-08T00:00:00Z", endsAt: "2026-08-18T00:00:00Z" },
+    { type: "event", title: "Neon Rift", subtitle: "Мистери-бокс: Draco (мотоцикл) · аутфит Glory Days (Esper Zero) · до 15 боксов за Fons / Annulith", startsAt: "2026-07-08T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     { type: "event", title: "Stamina Recharge", subtitle: "2× City Stamina в активностях Heathereau Hobbies", startsAt: "2026-07-13T00:00:00Z", endsAt: "2026-07-20T00:00:00Z" },
     { type: "event", title: "Shadow-n-Seek", subtitle: "Прятки в Clement Academy: игроки прячутся в объектах кампуса", startsAt: "2026-07-17T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     { type: "event", title: "Gold Clash", subtitle: "2× Fons в Pink Paws Heist", startsAt: "2026-07-20T00:00:00Z", endsAt: "2026-08-03T00:00:00Z" },
