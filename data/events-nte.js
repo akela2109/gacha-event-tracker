@@ -2,7 +2,7 @@
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-07-20T00:00:00Z",
+  generatedAt: "2026-07-21T00:00:00Z",
   version: "1.2",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
   items: [
