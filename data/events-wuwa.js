@@ -1,8 +1,8 @@
 // Снапшот Wuthering Waves (Kuro Games). У игры нет публичного CORS-API событий,
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-07-28.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-07-29.
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-07-28T00:00:00Z",
+  generatedAt: "2026-07-29T00:00:00Z",
   version: "3.5",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg · sportskeeda.com",
   items: [
@@ -11,8 +11,8 @@ window.SNAPSHOT_WUWA = {
     { type: "banner", title: "Yangyang: Xuanling (Дебют)", subtitle: "Havoc · меч · 5★ · оружие Azure Oath", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-30T00:00:00Z" },
     { type: "banner", title: "Lynae & Luuk Herssen (Реран · Фаза 1)", subtitle: "Lynae (Spectro · пистолеты) · Luuk Herssen (Spectro · перчатки)", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-07-30T00:00:00Z" },
     // Фаза 2 (30 июля — 19 августа)
-    { type: "banner", title: "Suisui (Дебют)", subtitle: "Glacio · ректификатор · саппорт · фаза 2", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
-    { type: "banner", title: "Aemeath (Реран · Фаза 2)", subtitle: "5★ реран", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "banner", title: "Suisui (Дебют)", subtitle: "Glacio · ректификатор · саппорт · оружие Firstlight's Herald · 4★ Baizhi/Mortefi/Lumi", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
+    { type: "banner", title: "Aemeath (Реран · Фаза 2)", subtitle: "Fusion · меч · первый реран с патча 3.1 · оружие Everbright Polestar", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     // Special Selector Banners — весь патч
     { type: "banner", title: "Starpath Reverbs (Резонатор-Селектор)", subtitle: "Выбор: Jiyan · Yinlin · Jinhsi · Changli · Zhezhi · Xiangli Yao", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
     { type: "banner", title: "Tideforge Reverbs (Оружие-Селектор)", subtitle: "Выбор фирменного оружия персонажей из Starpath Reverbs", startsAt: "2026-07-10T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
