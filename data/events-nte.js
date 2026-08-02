@@ -1,8 +1,8 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-01.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-02.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-01T00:00:00Z",
+  generatedAt: "2026-08-02T00:00:00Z",
 
   version: "1.2",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
@@ -30,6 +30,6 @@ window.SNAPSHOT_NTE = {
     // Эндгейм-режим Beyond the Rails. Три ротации версии 1.2, сброс раз в ~14 дней.
     { type: "endgame", title: "Beyond the Rails: Blazing Circle", subtitle: "Первая ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-07-16T00:00:00Z", endsAt: "2026-07-30T00:00:00Z" },
     { type: "endgame", title: "Beyond the Rails: Cresting Circle", subtitle: "Вторая ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-13T00:00:00Z" },
-    { type: "endgame", title: "Beyond the Rails: Waxing Circle", subtitle: "Третья ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-08-13T00:00:00Z", endsAt: "2026-08-27T00:00:00Z" }
+    { type: "endgame", title: "Beyond the Rails: Howling Circle", subtitle: "Третья ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-08-13T00:00:00Z", endsAt: "2026-08-27T00:00:00Z" }
   ]
 };
