@@ -1,6 +1,6 @@
 // Источники и нормализация в единую схему события.
 // Единая схема: { game, type, title, subtitle, startsAt, endsAt, image, url, source }
-//   game:   'genshin' | 'hsr' | 'wuwa' | 'nte'
+//   game:   'genshin' | 'hsr' | 'wuwa' | 'nte' | 'zzz'
 //   type:   'banner' | 'event' | 'version' | 'maintenance'
 //   *At:    ISO-строка | Unix-секунды | null
 //   source: 'live' | 'snapshot'
@@ -12,25 +12,31 @@
     genshin: { label: "Genshin Impact", short: "Genshin" },
     hsr:     { label: "Honkai: Star Rail", short: "Star Rail" },
     wuwa:    { label: "Wuthering Waves", short: "WuWa" },
-    nte:     { label: "Neverness to Everness", short: "NTE" }
+    nte:     { label: "Neverness to Everness", short: "NTE" },
+    zzz:     { label: "Zenless Zone Zero", short: "ZZZ" }
   };
 
-  // Живые CORS-дружелюбные API (community). Есть только у HoYoverse-игр.
+  // Живые CORS-дружелюбные API (community). Есть только у HoYoverse-игр —
+  // Genshin/HSR/ZZZ (все три отдают {events, banners, challenges} через api.ennead.cc,
+  // проверено вручную 09.08.2026: CORS access-control-allow-origin: * такой же, как у Genshin).
   var LIVE = {
     genshin: "https://api.ennead.cc/mihoyo/genshin/calendar",
-    hsr:     "https://api.ennead.cc/mihoyo/starrail/calendar"
+    hsr:     "https://api.ennead.cc/mihoyo/starrail/calendar",
+    zzz:     "https://api.ennead.cc/mihoyo/zenless/calendar"
   };
 
-  // --- HoYo (Genshin/HSR): сырой ответ {events, banners, challenges} → нормализованные items.
+  // --- HoYo (Genshin/HSR/ZZZ): сырой ответ {events, banners, challenges} → нормализованные items.
+  // Genshin/HSR кладут персонажей/оружие в characters/weapons/light_cones с числовой rarity (5 — топ);
+  // ZZZ — в agents/w_engines с буквенной rarity ("S" — топ). Учитываем оба варианта.
   function featured5(banner) {
-    var pools = [].concat(banner.characters || [], banner.weapons || [], banner.light_cones || []);
-    var fives = pools.filter(function (x) { return Number(x.rarity) === 5; });
+    var pools = [].concat(banner.characters || [], banner.weapons || [], banner.light_cones || [], banner.agents || [], banner.w_engines || []);
+    var fives = pools.filter(function (x) { return Number(x.rarity) === 5 || x.rarity === "S"; });
     var pick = (fives.length ? fives : pools).map(function (x) { return x.name; }).filter(Boolean);
     return pick.join(" · ");
   }
   function firstIcon(banner) {
-    var pools = [].concat(banner.characters || [], banner.weapons || [], banner.light_cones || []);
-    var five = pools.filter(function (x) { return Number(x.rarity) === 5 && x.icon; })[0] || pools.filter(function (x) { return x.icon; })[0];
+    var pools = [].concat(banner.characters || [], banner.weapons || [], banner.light_cones || [], banner.agents || [], banner.w_engines || []);
+    var five = pools.filter(function (x) { return (Number(x.rarity) === 5 || x.rarity === "S") && x.icon; })[0] || pools.filter(function (x) { return x.icon; })[0];
     return five ? five.icon : null;
   }
   // HoYo-API для событий с необъявленными датами шлёт 0, а не null (Genshin 6.7:
@@ -39,9 +45,12 @@
   function ts(v) { return v ? v : null; }
 
   function rewardText(ev) {
-    if (!ev.special_reward) return "";
-    var r = ev.special_reward;
-    return r.name + (r.amount ? " ×" + r.amount : "");
+    if (ev.special_reward) {
+      var r = ev.special_reward;
+      return r.name + (r.amount ? " ×" + r.amount : "");
+    }
+    if (ev.polychrome) return "Polychrome ×" + ev.polychrome; // ZZZ: награда — число, а не объект
+    return "";
   }
 
   // --- Эндгейм-режимы (повторяющийся контент). HoYo распознаём по type_name
@@ -56,13 +65,19 @@
     ChallengeTypeChasm: "Memory of Chaos",
     ChallengeTypeStory: "Pure Fiction",
     ChallengeTypeBoss: "Apocalyptic Shadow",
-    ChallengeTypePeak: "Anomaly Arbitration"
+    ChallengeTypePeak: "Anomaly Arbitration",
+    // Zenless Zone Zero — type_name уже в человекочитаемом snake_case, не в CamelCase, как у Genshin/HSR.
+    deadly_assault: "Deadly Assault",
+    shiyu_defense: "Shiyu Defense",
+    threshold_simulation: "Threshold Simulation",
+    annihilation_simulacrum: "Annihilation Simulacrum"
   };
   var ENDGAME_NAMES = {
     genshin: ["Spiral Abyss", "Abyssal Moon Spire", "Imaginarium Theater", "Stygian Onslaught"],
     hsr: ["Memory of Chaos", "Pure Fiction", "Apocalyptic Shadow", "Anomaly Arbitration", "Forgotten Hall"],
     wuwa: ["Tower of Adversity", "Tactical Hologram", "Illusive Realm"],
-    nte: ["Prime Circle", "Beyond the Rails"]
+    nte: ["Prime Circle", "Beyond the Rails"],
+    zzz: ["Shiyu Defense", "Deadly Assault", "Threshold Simulation", "Annihilation Simulacrum"]
   };
   // Каноничное имя эндгейм-режима или null (значит — обычный ивент).
   function endgameCanonical(game, name, typeName) {
@@ -119,6 +134,7 @@
     if (global.SNAPSHOT_HSR)     all = all.concat(normalizeHoyo(global.SNAPSHOT_HSR.raw, "hsr", "snapshot"));
     if (global.SNAPSHOT_WUWA)    all = all.concat(normalizeSnapshotItems(global.SNAPSHOT_WUWA.items, "wuwa"));
     if (global.SNAPSHOT_NTE)     all = all.concat(normalizeSnapshotItems(global.SNAPSHOT_NTE.items, "nte"));
+    if (global.SNAPSHOT_ZZZ)     all = all.concat(normalizeHoyo(global.SNAPSHOT_ZZZ.raw, "zzz", "snapshot"));
     return all;
   }
 
@@ -128,7 +144,8 @@
       genshin: global.SNAPSHOT_GENSHIN ? global.SNAPSHOT_GENSHIN.generatedAt : null,
       hsr:     global.SNAPSHOT_HSR ? global.SNAPSHOT_HSR.generatedAt : null,
       wuwa:    global.SNAPSHOT_WUWA ? global.SNAPSHOT_WUWA.generatedAt : null,
-      nte:     global.SNAPSHOT_NTE ? global.SNAPSHOT_NTE.generatedAt : null
+      nte:     global.SNAPSHOT_NTE ? global.SNAPSHOT_NTE.generatedAt : null,
+      zzz:     global.SNAPSHOT_ZZZ ? global.SNAPSHOT_ZZZ.generatedAt : null
     };
   }
 

@@ -18,7 +18,7 @@
       "codesTitle": "🎁 Промокоды",
       "shareBtn": "↗ Поделиться",
       "refreshBtn": "⟳ Обновить",
-      "footer": "Данные: api.ennead.cc (live, Genshin/HSR) · game8.co, neverness.gg (снапшот, WuWa/NTE). Неофициальный проект.",
+      "footer": "Данные: api.ennead.cc (live, Genshin/HSR/ZZZ) · game8.co, neverness.gg (снапшот, WuWa/NTE). Неофициальный проект.",
       // --- категории и типы (app.js) ---
       "cat.banner": "Баннеры",
       "cat.event": "Ивенты",
@@ -75,7 +75,7 @@
       "codesTitle": "🎁 Promo codes",
       "shareBtn": "↗ Share",
       "refreshBtn": "⟳ Refresh",
-      "footer": "Data: api.ennead.cc (live, Genshin/HSR) · game8.co, neverness.gg (snapshot, WuWa/NTE). Unofficial project.",
+      "footer": "Data: api.ennead.cc (live, Genshin/HSR/ZZZ) · game8.co, neverness.gg (snapshot, WuWa/NTE). Unofficial project.",
       "cat.banner": "Banners",
       "cat.event": "Events",
       "cat.endgame": "Endgame",

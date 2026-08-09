@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gacha Event Tracker — Genshin · HSR · WuWa · NTE</title>
-  <meta name="description" content="Календарь-таймлайн событий и баннеров для Genshin Impact, Honkai: Star Rail, Wuthering Waves и Neverness to Everness." />
+  <title>Gacha Event Tracker — Genshin · HSR · WuWa · NTE · ZZZ</title>
+  <meta name="description" content="Календарь-таймлайн событий и баннеров для Genshin Impact, Honkai: Star Rail, Wuthering Waves, Neverness to Everness и Zenless Zone Zero." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -17,7 +17,7 @@
         <span class="brand__mark">◆</span>
         <div>
           <h1 class="brand__title">Gacha Event Tracker</h1>
-          <p class="brand__sub">Genshin · Star Rail · Wuthering Waves · NTE</p>
+          <p class="brand__sub">Genshin · Star Rail · Wuthering Waves · NTE · ZZZ</p>
         </div>
       </div>
       <div class="topbar__actions">
@@ -38,6 +38,7 @@
         <button class="chip tab" data-val="hsr" data-game="hsr">Star Rail</button>
         <button class="chip tab" data-val="wuwa" data-game="wuwa">WuWa</button>
         <button class="chip tab" data-val="nte" data-game="nte">NTE</button>
+        <button class="chip tab" data-val="zzz" data-game="zzz">ZZZ</button>
       </div>
       <div class="filter-row" id="typeFilters" data-group="type">
         <button class="chip is-active" data-val="all" data-i18n="type.all">Всё</button>
@@ -78,7 +79,7 @@
   <div id="tlTip" class="tl-tip" hidden></div>
 
   <footer class="foot">
-    <p data-i18n="footer">Данные: api.ennead.cc (live, Genshin/HSR) · game8.co, neverness.gg (снапшот, WuWa/NTE). Неофициальный проект.</p>
+    <p data-i18n="footer">Данные: api.ennead.cc (live, Genshin/HSR/ZZZ) · game8.co, neverness.gg (снапшот, WuWa/NTE). Неофициальный проект.</p>
   </footer>
 
   <!-- Данные (снапшоты) -->
@@ -86,6 +87,7 @@
   <script src="data/events-hsr.js"></script>
   <script src="data/events-wuwa.js"></script>
   <script src="data/events-nte.js"></script>
+  <script src="data/events-zzz.js"></script>
   <script src="data/codes.js"></script>
   <!-- Логика -->
   <script src="js/i18n.js"></script>

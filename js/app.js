@@ -3,7 +3,7 @@
   "use strict";
   var FMT = window.FMT, SOURCES = window.SOURCES;
   var DAY = 86400000;
-  var GAME_ORDER = ["genshin", "hsr", "wuwa", "nte"];
+  var GAME_ORDER = ["genshin", "hsr", "wuwa", "nte", "zzz"];
 
   // Категории контента (порядок сверху вниз внутри дорожки игры).
   var CATS = [

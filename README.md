@@ -1,14 +1,14 @@
-# Gacha Event Tracker — Genshin · Star Rail · Wuthering Waves · NTE
+# Gacha Event Tracker — Genshin · Star Rail · Wuthering Waves · NTE · ZZZ
 
-Дашборд-трекер событий и баннеров четырёх гача-игр в одном месте: **Genshin Impact**,
-**Honkai: Star Rail**, **Wuthering Waves** и **Neverness to Everness (NTE)**.
+Дашборд-трекер событий и баннеров пяти гача-игр в одном месте: **Genshin Impact**,
+**Honkai: Star Rail**, **Wuthering Waves**, **Neverness to Everness (NTE)** и **Zenless Zone Zero (ZZZ)**.
 
 ## Описание
 Статическая страница (без сборки, без бэкенда), работает по `file://` и подходит для GitHub Pages.
 Архитектура **гибридная**:
 
 1. При загрузке мгновенно рендерит данные из снапшотов `data/*.js` — работает всегда, даже офлайн.
-2. Затем пытается освежить данные из живого CORS-API (`api.ennead.cc`) для Genshin и Star Rail;
+2. Затем пытается освежить данные из живого CORS-API (`api.ennead.cc`) для Genshin, Star Rail и ZZZ;
    при успехе мёржит и помечает источник как **live ✓**.
 3. Если live недоступен (CORS/офлайн) — тихий фолбэк на снапшот, бейдж показывает дату снапшота.
 
@@ -16,14 +16,15 @@
 (данные собираются скрейпом и обновляются по запросу).
 
 ## Возможности
-- 🗂️ **Вкладки**: «Сводка по всем играм» (все 4 дорожки сразу) + отдельная вкладка на каждую игру.
+- 🗂️ **Вкладки**: «Сводка по всем играм» (все дорожки сразу) + отдельная вкладка на каждую игру.
   На вкладке игры — обогащённый вид: шапка с названием/версией/акцентным цветом, таймлайн этой игры
   во всю ширину с более крупными строками, её события, её промокоды и бейдж свежести.
 - 🧱 **Категории контента** внутри дорожки каждой игры (с подписью слева):
   **▰ Баннеры** (персонажные + оружейные) · **◇ Ивенты** (разовые временные события) ·
   **⚔ Эндгейм** (повторяющиеся режимы) · **◆ Версии**. Эндгейм-режимы распознаются автоматически:
-  у Genshin/HSR — из live-API по `type_name` (Abyssal Moon Spire / Imaginarium Theater / Stygian
-  Onslaught; Memory of Chaos / Pure Fiction / Apocalyptic Shadow / Anomaly Arbitration), у WuWa/NTE —
+  у Genshin/HSR/ZZZ — из live-API по `type_name` (Abyssal Moon Spire / Imaginarium Theater / Stygian
+  Onslaught; Memory of Chaos / Pure Fiction / Apocalyptic Shadow / Anomaly Arbitration; Shiyu Defense /
+  Deadly Assault / Threshold Simulation / Annihilation Simulacrum), у WuWa/NTE —
   из снапшота (Tower of Adversity, Tactical Holograms, Depths of Illusive Realm; Prime Circle).
 - 🎴 **Баннеры** (персонажи/оружие/light cone) с таймером и прогресс-баром.
   Баннеры одной игры с **одинаковыми датами** старта/конца автоматически сливаются в одну линию
@@ -59,25 +60,26 @@ gacha-event-tracker/
     ├── events-hsr.js       # снапшот (сырой вид API, Unix-время)
     ├── events-wuwa.js      # снапшот (нормализованный, ISO)
     ├── events-nte.js       # снапшот (нормализованный, ISO)
+    ├── events-zzz.js       # снапшот (сырой вид API, Unix-время)
     └── codes.js            # промокоды
 ```
 
 ## Запуск
 - Локально: открыть `index.html` двойным кликом.
-  - Genshin/HSR могут не подтянуться из live по `file://` (ограничения CORS у браузера) — тогда
+  - Genshin/HSR/ZZZ могут не подтянуться из live по `file://` (ограничения CORS у браузера) — тогда
     показываются данные из снапшота. На GitHub Pages live работает надёжно.
 - GitHub Pages: задеплоить папку как статический сайт.
 
 ## Источники данных
-- **Genshin / Star Rail** — `api.ennead.cc/mihoyo/{genshin|starrail}/calendar` (community, CORS, live).
+- **Genshin / Star Rail / ZZZ** — `api.ennead.cc/mihoyo/{genshin|starrail|zenless}/calendar` (community, CORS, live).
 - **Wuthering Waves** — game8.co (снапшот).
 - **NTE** — neverness.gg, game8.co (снапшот).
-- **Промокоды** — game8.co, hoyolab, eurogamer (снапшот). Активные коды NTE на источнике скрыты за
-  кнопкой — для них дана ссылка «Источник».
+- **Промокоды** — game8.co, hoyolab, eurogamer, zenless.hoyoverse.com (снапшот, все игры — HoYoverse
+  коды через API не отдаёт). Активные коды NTE на источнике скрыты за кнопкой — для них дана ссылка «Источник».
 
 ## Обновление снапшотов
 Снапшоты в `data/*.js` — это слепок на дату `generatedAt`. Чтобы обновить, попросить Claude
-перескрейпить источники (firecrawl) и переписать соответствующие файлы. Genshin/HSR при наличии сети
+перескрейпить источники (firecrawl) и переписать соответствующие файлы. Genshin/HSR/ZZZ при наличии сети
 освежаются сами из live-API. При желании можно повесить расписание (`/schedule`) для авто-рескрейпа.
 
 > Неофициальный фанатский проект. Названия игр и контент принадлежат их правообладателям

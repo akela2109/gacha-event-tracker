@@ -20,6 +20,7 @@
   --g-hsr: #A78BFA;     /* звёздная лаванда — свечение из ключевого арта */
   --g-wuwa: #4FA8F0;    /* резонансный голубой — вторичный цвет Kuro (#3C8BE7), осветлён */
   --g-nte: #FD61A8;     /* неоновая фуксия — точный брендовый цвет с nte.perfectworld.com */
+  --g-zzz: #F5C518;     /* хазард-жёлтый — фирменный цвет логотипа Zenless Zone Zero */
 
   --st-active: #3ddc97;
   --st-soon: #ff8c5a;
@@ -75,6 +76,7 @@ body {
 #gameFilters .chip[data-game="hsr"].is-active { background: var(--g-hsr); border-color: var(--g-hsr); color: #150a2e; }
 #gameFilters .chip[data-game="wuwa"].is-active { background: var(--g-wuwa); border-color: var(--g-wuwa); color: #04192b; }
 #gameFilters .chip[data-game="nte"].is-active { background: var(--g-nte); border-color: var(--g-nte); color: #2a0a17; }
+#gameFilters .chip[data-game="zzz"].is-active { background: var(--g-zzz); border-color: var(--g-zzz); color: #2a1f00; }
 
 /* ---- Tabs (вкладки по играм) ---- */
 .tabs { gap: 4px; border-bottom: 1px solid var(--line); padding-bottom: 0; margin-bottom: 4px; }
@@ -89,6 +91,7 @@ body {
 #gameFilters .tab[data-game="hsr"].is-active::after { background: var(--g-hsr); }
 #gameFilters .tab[data-game="wuwa"].is-active::after { background: var(--g-wuwa); }
 #gameFilters .tab[data-game="nte"].is-active::after { background: var(--g-nte); }
+#gameFilters .tab[data-game="zzz"].is-active::after { background: var(--g-zzz); }
 
 /* ---- View title / game hero ---- */
 /* Свой display в правиле ниже перебивает браузерное [hidden] { display: none },
@@ -104,6 +107,7 @@ body {
 .game-hero[data-game="hsr"]     { --gc: var(--g-hsr); }
 .game-hero[data-game="wuwa"]    { --gc: var(--g-wuwa); }
 .game-hero[data-game="nte"]     { --gc: var(--g-nte); }
+.game-hero[data-game="zzz"]     { --gc: var(--g-zzz); }
 .game-hero__main { display: flex; align-items: center; gap: 10px; }
 .game-hero__dot { width: 12px; height: 12px; border-radius: 50%; background: var(--gc, var(--accent));
   box-shadow: 0 0 12px var(--gc, var(--accent)); }
@@ -170,6 +174,7 @@ body {
 .lane[data-game="hsr"]     { --gc: var(--g-hsr); }
 .lane[data-game="wuwa"]    { --gc: var(--g-wuwa); }
 .lane[data-game="nte"]     { --gc: var(--g-nte); }
+.lane[data-game="zzz"]     { --gc: var(--g-zzz); }
 /* мини-заголовок игры (над её категориями) */
 .lane__game { position: sticky; left: 0; z-index: 4; background: var(--card);
   padding: 7px 12px 3px; display: flex; align-items: baseline; gap: 7px;
@@ -246,6 +251,7 @@ body {
 .tba__item[data-game="hsr"] { border-left-color: var(--g-hsr); }
 .tba__item[data-game="wuwa"] { border-left-color: var(--g-wuwa); }
 .tba__item[data-game="nte"] { border-left-color: var(--g-nte); }
+.tba__item[data-game="zzz"] { border-left-color: var(--g-zzz); }
 
 /* ---- Codes ---- */
 .codes { margin-top: 32px; }
@@ -257,6 +263,7 @@ body {
 .code[data-game="hsr"] { border-left-color: var(--g-hsr); }
 .code[data-game="wuwa"] { border-left-color: var(--g-wuwa); }
 .code[data-game="nte"] { border-left-color: var(--g-nte); }
+.code[data-game="zzz"] { border-left-color: var(--g-zzz); }
 .code__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .code__str { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 14px; font-weight: 700; }
 .code__copy { cursor: pointer; font: inherit; font-size: 11px; font-weight: 600; color: var(--txt-dim);

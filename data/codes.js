@@ -1,7 +1,7 @@
 // Промокоды (снапшот). Коды волатильны — обновлять по запросу.
-// Genshin/HSR/WuWa — реальные коды строкой. NTE — активные коды на game8 скрыты
+// Genshin/HSR/WuWa/ZZZ — реальные коды строкой. NTE — активные коды на game8 скрыты
 // за кнопкой "Copied" и недоступны для скрейпа, поэтому ведём ссылкой на источник.
-// Источники: game8.co (Genshin/HSR/WuWa codes pages), mobalytics.gg.
+// Источники: game8.co (Genshin/HSR/WuWa/ZZZ codes pages), mobalytics.gg, zenless.hoyoverse.com.
 window.CODES = {
   generatedAt: "2026-06-11T00:00:00Z",
   items: [
@@ -25,6 +25,13 @@ window.CODES = {
     { game: "wuwa", code: "BEYONDTHEDOOR", reward: "Astrite (код с лайвстрима 3.4, ограниченный срок)" },
     { game: "wuwa", code: "SAYCHEESE", reward: "Astrite (код с лайвстрима 3.4, ограниченный срок)" },
     // Neverness to Everness — активные коды скрыты на источнике
-    { game: "nte", code: "—", reward: "Активные коды NTE скрыты на game8 за кнопкой. Открой источник, чтобы скопировать актуальные.", url: "https://game8.co/games/Neverness-to-Everness/archives/593718", note: true }
+    { game: "nte", code: "—", reward: "Активные коды NTE скрыты на game8 за кнопкой. Открой источник, чтобы скопировать актуальные.", url: "https://game8.co/games/Neverness-to-Everness/archives/593718", note: true },
+    // Zenless Zone Zero (game8: ZZZ Codes, проверено 09.08.2026)
+    { game: "zzz", code: "ZENLESSGIFT", reward: "50 Polychrome, 2 Official Investigator Log, 3 W-Engine Power Supply, 1 Bangboo Algorithm Module (постоянный)" },
+    { game: "zzz", code: "ZZZ2YEAR", reward: "50 Polychrome" },
+    { game: "zzz", code: "ZZZ31REMIELLE", reward: "60 Polychrome, 6 666 Denny" },
+    { game: "zzz", code: "ZZZ30BANGBOO", reward: "60 Polychrome, 6 666 Denny" },
+    { game: "zzz", code: "ZZZSEASON3", reward: "50 Polychrome" },
+    { game: "zzz", code: "ROSCAELIFER0617", reward: "30 Polychrome" }
   ]
 };
