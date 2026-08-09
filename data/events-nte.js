@@ -1,8 +1,8 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-07.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-09.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-07T00:00:00Z",
+  generatedAt: "2026-08-09T00:00:00Z",
 
   version: "1.2",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
@@ -30,6 +30,23 @@ window.SNAPSHOT_NTE = {
     // Эндгейм-режим Beyond the Rails. Три ротации версии 1.2, сброс раз в ~14 дней.
     { type: "endgame", title: "Beyond the Rails: Blazing Circle", subtitle: "Первая ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-07-16T00:00:00Z", endsAt: "2026-07-30T00:00:00Z" },
     { type: "endgame", title: "Beyond the Rails: Cresting Circle", subtitle: "Вторая ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-13T00:00:00Z" },
-    { type: "endgame", title: "Beyond the Rails: Howling Circle", subtitle: "Третья ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-08-13T00:00:00Z", endsAt: "2026-08-27T00:00:00Z" }
+    { type: "endgame", title: "Beyond the Rails: Howling Circle", subtitle: "Третья ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-08-13T00:00:00Z", endsAt: "2026-08-27T00:00:00Z" },
+
+    // --- Версия 1.3 (с 19 августа 2026; анонс — стрим 8 авг) ---
+    { type: "version", title: "Версия 1.3 «Rising from the Moonlit Fog»", subtitle: "Zankou и Linko · летний Volley Star · финал арки Scarlet Letter", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    // Фаза 1 (19 августа — 9 сентября)
+    { type: "banner", title: "Alluring Shadows (Zankou, Дебют)", subtitle: "S-ранг · Incantation DPS · оружие Ravenous Blade · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
+    { type: "banner", title: "The Ichi-Daime (Nanally, Реран)", subtitle: "S-ранг · Anima атакующий · оружие Ready-Ready · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
+    // Фаза 2 (9 — 30 сентября)
+    { type: "banner", title: "Surfing All Channels! (Linko, Дебют)", subtitle: "S-ранг · Anima DPS · ETD-6 · фаза 2", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "banner", title: "Misty Tipsy Style (Hotori, Реран)", subtitle: "S-ранг · Cosmos суб-DPS · способность время-стоп · фаза 2", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    // Ивенты версии 1.3
+    { type: "event", title: "Circle Gift", subtitle: "7-дневный логин-ивент · до 10 Solid Dice", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Volley Star", subtitle: "ПвП 2v2 пляжный волейбол · конкурентный режим · весь патч", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Mews Flash", subtitle: "Скретч-карты за Fons у Midnight Catzebo · весь патч", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Neon Rift", subtitle: "Летний мистери-бокс · новые косметики и транспорт · до 15 боксов за Fons / Annulith", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Gold Clash", subtitle: "2× Fons в Pink Paws Heist", startsAt: "2026-08-31T00:00:00Z", endsAt: "2026-09-14T00:00:00Z" },
+    { type: "event", title: "Pixel Surge", subtitle: "2× вознаграждения Character Pixel", startsAt: "2026-09-14T00:00:00Z", endsAt: "2026-09-21T00:00:00Z" },
+    { type: "event", title: "Fons Rush", subtitle: "2× Fons в активностях Heathereau Hobbies", startsAt: "2026-09-21T00:00:00Z", endsAt: "2026-09-28T00:00:00Z" }
   ]
 };
