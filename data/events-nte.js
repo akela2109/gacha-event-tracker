@@ -1,8 +1,8 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-10.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-12.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-10T00:00:00Z",
+  generatedAt: "2026-08-12T00:00:00Z",
 
   version: "1.2",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
@@ -45,8 +45,12 @@ window.SNAPSHOT_NTE = {
     { type: "event", title: "Volley Star", subtitle: "ПвП 2v2 пляжный волейбол · конкурентный режим · весь патч", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Mews Flash", subtitle: "Скретч-карты за Fons у Midnight Catzebo · весь патч", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Neon Rift", subtitle: "Летний мистери-бокс · новые косметики и транспорт · до 15 боксов за Fons / Annulith", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Surf Breaker", subtitle: "Гонки на водном мотоцикле-гидроцикле · летний ивент", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Shipwreck Salvage", subtitle: "Поиск груза и материалов прокачки на берегу", startsAt: "2026-08-28T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Gold Clash", subtitle: "2× Fons в Pink Paws Heist", startsAt: "2026-08-31T00:00:00Z", endsAt: "2026-09-14T00:00:00Z" },
+    { type: "event", title: "Runaway Echoes", subtitle: "Выживание против волн врагов · боевой ивент", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Pixel Surge", subtitle: "2× вознаграждения Character Pixel", startsAt: "2026-09-14T00:00:00Z", endsAt: "2026-09-21T00:00:00Z" },
+    { type: "event", title: "Breezy Tour", subtitle: "Прогулка на велосипеде Yesteryear с персонажем до пункта назначения", startsAt: "2026-09-17T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Fons Rush", subtitle: "2× Fons в активностях Heathereau Hobbies", startsAt: "2026-09-21T00:00:00Z", endsAt: "2026-09-28T00:00:00Z" }
   ]
 };

@@ -1,8 +1,8 @@
 // Снапшот Wuthering Waves (Kuro Games). У игры нет публичного CORS-API событий,
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-11.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-12.
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-08-11T00:00:00Z",
+  generatedAt: "2026-08-12T00:00:00Z",
 
   version: "3.5",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg · sportskeeda.com",
@@ -51,6 +51,6 @@ window.SNAPSHOT_WUWA = {
     // Эндгейм-режимы 3.6. ToA: циклы 28 дней — сбросы 17 авг и 14 сент.
     { type: "endgame", title: "Tower of Adversity", subtitle: "Hazard Zone · цикл 28 дней · сброс 17 авг", startsAt: "2026-08-17T00:00:00Z", endsAt: "2026-09-14T00:00:00Z" },
     { type: "endgame", title: "Tower of Adversity", subtitle: "Hazard Zone · цикл 28 дней · сброс 14 сент", startsAt: "2026-09-14T00:00:00Z", endsAt: "2026-10-12T00:00:00Z" },
-    { type: "endgame", title: "Tactical Holograms", subtitle: "Новый цикл 3.6 · боссы Mengzhou", startsAt: "2026-08-20T00:00:00Z", endsAt: "2026-09-29T00:00:00Z" }
+    { type: "endgame", title: "Tactical Holograms", subtitle: "Myriad Snare: Rustfire Chassis (Autopuppet) · боссы Mengzhou · новый эхо-скин", startsAt: "2026-08-20T00:00:00Z", endsAt: "2026-09-29T00:00:00Z" }
   ]
 };
