@@ -1,8 +1,8 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-12.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-14.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-12T00:00:00Z",
+  generatedAt: "2026-08-14T00:00:00Z",
 
   version: "1.2",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
@@ -30,7 +30,7 @@ window.SNAPSHOT_NTE = {
     // Эндгейм-режим Beyond the Rails. Три ротации версии 1.2, сброс раз в ~14 дней.
     { type: "endgame", title: "Beyond the Rails: Blazing Circle", subtitle: "Первая ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-07-16T00:00:00Z", endsAt: "2026-07-30T00:00:00Z" },
     { type: "endgame", title: "Beyond the Rails: Cresting Circle", subtitle: "Вторая ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-07-30T00:00:00Z", endsAt: "2026-08-13T00:00:00Z" },
-    { type: "endgame", title: "Beyond the Rails: Howling Circle", subtitle: "Третья ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-08-13T00:00:00Z", endsAt: "2026-08-27T00:00:00Z" },
+    { type: "endgame", title: "Beyond the Rails: Waxing Circle", subtitle: "Третья ротация версии 1.2 · групповые бои с боссами", startsAt: "2026-08-13T00:00:00Z", endsAt: "2026-08-27T00:00:00Z" },
 
     // --- Версия 1.3 (с 19 августа 2026; анонс — стрим 8 авг) ---
     { type: "version", title: "Версия 1.3 «Rising from the Moonlit Fog»", subtitle: "Zankou и Linko · летний Volley Star · финал арки Scarlet Letter", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
@@ -51,6 +51,8 @@ window.SNAPSHOT_NTE = {
     { type: "event", title: "Runaway Echoes", subtitle: "Выживание против волн врагов · боевой ивент", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Pixel Surge", subtitle: "2× вознаграждения Character Pixel", startsAt: "2026-09-14T00:00:00Z", endsAt: "2026-09-21T00:00:00Z" },
     { type: "event", title: "Breezy Tour", subtitle: "Прогулка на велосипеде Yesteryear с персонажем до пункта назначения", startsAt: "2026-09-17T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
-    { type: "event", title: "Fons Rush", subtitle: "2× Fons в активностях Heathereau Hobbies", startsAt: "2026-09-21T00:00:00Z", endsAt: "2026-09-28T00:00:00Z" }
+    { type: "event", title: "Fons Rush", subtitle: "2× Fons в активностях Heathereau Hobbies", startsAt: "2026-09-21T00:00:00Z", endsAt: "2026-09-28T00:00:00Z" },
+    // Эндгейм-режим Beyond the Rails версии 1.3. Ротации по ~14 дней.
+    { type: "endgame", title: "Beyond the Rails: Incandescent Circle", subtitle: "Первая ротация версии 1.3 · групповые бои с боссами", startsAt: "2026-08-27T00:00:00Z", endsAt: "2026-09-10T00:00:00Z" }
   ]
 };
