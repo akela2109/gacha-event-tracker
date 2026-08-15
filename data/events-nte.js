@@ -1,10 +1,10 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-14.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-15.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-14T00:00:00Z",
+  generatedAt: "2026-08-15T00:00:00Z",
 
-  version: "1.2",
+  version: "1.3",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
   items: [
     { type: "version", title: "Версия 1.2 «999 Nights»", subtitle: "Shinku и Iroi · новый режим 999 Nights · запуск на Steam, Epic, Samsung", startsAt: "2026-07-08T00:00:00Z", endsAt: "2026-08-19T00:00:00Z" },
@@ -35,7 +35,7 @@ window.SNAPSHOT_NTE = {
     // --- Версия 1.3 (с 19 августа 2026; анонс — стрим 8 авг) ---
     { type: "version", title: "Версия 1.3 «Rising from the Moonlit Fog»", subtitle: "Zankou и Linko · летний Volley Star · финал арки Scarlet Letter", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     // Фаза 1 (19 августа — 9 сентября)
-    { type: "banner", title: "Alluring Shadows (Zankou, Дебют)", subtitle: "S-ранг · Incantation DPS · оружие Ravenous Blade · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
+    { type: "banner", title: "Alluring Shadows (Zankou, Дебют)", subtitle: "S-ранг · Incantation DPS · Gas Arcs · оружие Ravenous Blade · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
     { type: "banner", title: "The Ichi-Daime (Nanally, Реран)", subtitle: "S-ранг · Anima атакующий · оружие Ready-Ready · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
     // Фаза 2 (9 — 30 сентября)
     { type: "banner", title: "Surfing All Channels! (Linko, Дебют)", subtitle: "S-ранг · Anima DPS · ETD-6 · фаза 2", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
@@ -46,6 +46,8 @@ window.SNAPSHOT_NTE = {
     { type: "event", title: "Mews Flash", subtitle: "Скретч-карты за Fons у Midnight Catzebo · весь патч", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Neon Rift", subtitle: "Летний мистери-бокс · новые косметики и транспорт · до 15 боксов за Fons / Annulith", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Surf Breaker", subtitle: "Гонки на водном мотоцикле-гидроцикле · летний ивент", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Hunter's Crucible", subtitle: "Бои с боссами с настраиваемыми параметрами сложности · 7 боссов · Annulith и Fons за очки", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
+    { type: "event", title: "Stamina Recharge", subtitle: "2× City Stamina в активностях Heathereau Hobbies", startsAt: "2026-08-24T00:00:00Z", endsAt: "2026-08-31T00:00:00Z" },
     { type: "event", title: "Shipwreck Salvage", subtitle: "Поиск груза и материалов прокачки на берегу", startsAt: "2026-08-28T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "event", title: "Gold Clash", subtitle: "2× Fons в Pink Paws Heist", startsAt: "2026-08-31T00:00:00Z", endsAt: "2026-09-14T00:00:00Z" },
     { type: "event", title: "Runaway Echoes", subtitle: "Выживание против волн врагов · боевой ивент", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
