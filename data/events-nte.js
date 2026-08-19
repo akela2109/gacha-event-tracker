@@ -1,8 +1,8 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-18.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-19.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-18T00:00:00Z",
+  generatedAt: "2026-08-19T00:00:00Z",
 
   version: "1.3",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
