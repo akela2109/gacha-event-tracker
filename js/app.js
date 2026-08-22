@@ -31,6 +31,7 @@
   var $ = function (s) { return document.querySelector(s); };
   var timeline = $("#timeline"), empty = $("#emptyState"), badges = $("#freshBadges");
   var liveStatus = $("#liveStatus"), refreshBtn = $("#refreshBtn"), tip = $("#tlTip");
+  var timelineHead = $("#timelineHead"), tlTopScroll = $("#tlTopScroll");
 
   // ---------- Окно: текущий + следующий месяц ----------
   function buildWindow() {
@@ -219,7 +220,7 @@
     }
 
     return '<div class="lane" data-game="' + game + '">' +
-      '<div class="lane__game"><b>' + esc(g.short) + '</b>' + (ver ? '<small>' + esc(ver) + '</small>' : '') + '</div>' +
+      '<div class="lane__game"><div class="lane__game-inner"><b>' + esc(g.short) + '</b>' + (ver ? '<small>' + esc(ver) + '</small>' : '') + '</div></div>' +
       catRows + '</div>';
   }
 
@@ -231,7 +232,8 @@
     timeline.className = "tl" + (SOLO ? " is-solo" : "");
     // ширина полотна = по дню × DAY_PX (полотно шире экрана → горизонтальный скролл)
     var days = Math.round(WIN.len / DAY);
-    timeline.style.setProperty("--tl-min", "calc(var(--label) + " + (days * DAY_PX) + "px)");
+    // общий предок шапки-оси, верхнего ползунка и самого таймлайна — чтобы у всех троих совпадала ширина полотна
+    timeline.parentElement.style.setProperty("--tl-min", "calc(var(--label) + " + (days * DAY_PX) + "px)");
     var games = activeGames();
     var anyPlaced = false, tbaAll = [];
     var lanes = games.map(function (g) {
@@ -241,9 +243,9 @@
       return laneHTML(g);
     }).join("");
 
-    timeline.innerHTML =
-      '<div class="tl__head"><div class="tl__head-spacer"></div><div class="tl__axis">' + axisHTML() + '</div></div>' +
-      lanes;
+    timelineHead.innerHTML =
+      '<div class="tl__head"><div class="tl__head-spacer"></div><div class="tl__axis">' + axisHTML() + '</div></div>';
+    timeline.innerHTML = lanes;
     empty.hidden = anyPlaced;
 
     if (!didScroll) { didScroll = true; scrollToToday(); }
@@ -253,7 +255,7 @@
 
   // Центрировать горизонтальный скролл на «сегодня» (один раз при загрузке).
   function scrollToToday() {
-    var el = timeline.querySelector(".axis-day.is-today");
+    var el = timelineHead.querySelector(".axis-day.is-today");
     if (!el) return;
     var base = timeline.getBoundingClientRect(), rect = el.getBoundingClientRect();
     timeline.scrollLeft += (rect.left - base.left) - timeline.clientWidth / 2;
@@ -443,6 +445,21 @@
       if (e.target.closest(".tl-bar")) tip.hidden = true;
     });
   }
+  // Верхний ползунок и шапка-ось скроллятся программно, синхронно с .tl (второй, «верхний» скроллбар).
+  var syncingScroll = false;
+  function syncScrollFrom(source) {
+    if (syncingScroll) return;
+    syncingScroll = true;
+    var sl = source.scrollLeft;
+    if (timeline !== source) timeline.scrollLeft = sl;
+    if (timelineHead !== source) timelineHead.scrollLeft = sl;
+    if (tlTopScroll !== source) tlTopScroll.scrollLeft = sl;
+    syncingScroll = false;
+  }
+  function wireTopScroll() {
+    timeline.addEventListener("scroll", function () { syncScrollFrom(timeline); });
+    tlTopScroll.addEventListener("scroll", function () { syncScrollFrom(tlTopScroll); });
+  }
   function wireCopy() {
     $("#codesList").addEventListener("click", function (e) {
       var btn = e.target.closest(".code__copy"); if (!btn) return;
@@ -468,7 +485,7 @@
 
   function init() {
     I18N.apply();                    // перевести статичный HTML под сохранённый язык
-    wireFilters(); wireTip(); wireCopy(); wireLang();
+    wireFilters(); wireTip(); wireCopy(); wireLang(); wireTopScroll();
     renderCodes(); render(); renderGameHero();
     refreshBtn.addEventListener("click", loadLive);
     loadLive();
