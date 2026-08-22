@@ -1,8 +1,8 @@
 // Снапшот Neverness to Everness (Hotta Studio / Perfect World). Вышла 29.04.2026.
 // Публичного API нет — данные нормализованы вручную из скрейпа (neverness.gg, game8.co).
-// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-21.
+// Обновить: попросить Claude перескрейпить (firecrawl). Последнее обновление: 2026-08-22.
 window.SNAPSHOT_NTE = {
-  generatedAt: "2026-08-21T00:00:00Z",
+  generatedAt: "2026-08-22T00:00:00Z",
 
   version: "1.3",
   source: "neverness.gg · game8.co/games/Neverness-to-Everness · prydwen.gg",
@@ -35,7 +35,7 @@ window.SNAPSHOT_NTE = {
     // --- Версия 1.3 (с 19 августа 2026; анонс — стрим 8 авг) ---
     { type: "version", title: "Версия 1.3 «Rising from the Moonlit Fog»", subtitle: "Zankou и Linko · летний Volley Star · финал арки Scarlet Letter", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     // Фаза 1 (19 августа — 9 сентября)
-    { type: "banner", title: "Alluring Shadows (Zankou, Дебют)", subtitle: "S-ранг · Incantation DPS · Gas Arcs · оружие Ravenous Blade · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
+    { type: "banner", title: "Alluring Shadows (Zankou, Дебют)", subtitle: "S-ранг · Incantation DPS · Gas Arcs · дуга Ravenous Blade · скин Autumn Vignette · аксессуар Scarlet Sash · A: Mint · Edgar · Adler", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
     { type: "banner", title: "The Ichi-Daime (Nanally, Реран)", subtitle: "S-ранг · Anima атакующий · оружие Ready-Ready · фаза 1", startsAt: "2026-08-19T00:00:00Z", endsAt: "2026-09-09T00:00:00Z" },
     // Фаза 2 (9 — 30 сентября)
     { type: "banner", title: "Surfing All Channels! (Linko, Дебют)", subtitle: "S-ранг · Anima DPS · ETD-6 · фаза 2", startsAt: "2026-09-09T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
