@@ -2,7 +2,7 @@
 // поэтому данные хранятся уже нормализованными (даты — ISO). Источник: game8.co, prydwen.gg.
 // Обновить: попросить Claude перескрейпить (firecrawl).
 window.SNAPSHOT_WUWA = {
-  generatedAt: "2026-09-01T00:00:00Z",
+  generatedAt: "2026-09-02T00:00:00Z",
   version: "3.6",
   source: "game8.co/games/Wuthering-Waves · prydwen.gg · sportskeeda.com",
   items: [
@@ -15,7 +15,7 @@ window.SNAPSHOT_WUWA = {
     { type: "banner", title: "Hiyuki (Rerun)", subtitle: "5★ реран · фаза 2", startsAt: "2026-09-10T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "banner", title: "Mornye (Rerun)", subtitle: "5★ реран · фаза 2", startsAt: "2026-09-10T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
     { type: "banner", title: "Thousandfold Deliverance", subtitle: "Оружийный баннер Jingran · фаза 2", startsAt: "2026-09-10T00:00:00Z", endsAt: "2026-09-30T00:00:00Z" },
-    // --- Ивенты версии 3.6 (game8.co · sportskeeda.com, обновлено 01.09.2026) ---
+    // --- Ивенты версии 3.6 (game8.co · sportskeeda.com, обновлено 02.09.2026) ---
     { type: "event", title: "Gifts of Drifting Mist", subtitle: "Логин-ивент: 7 дней входа", startsAt: "2026-08-20T00:00:00Z", endsAt: "2026-09-29T00:00:00Z" },
     { type: "event", title: "Resonance Sim Realm", subtitle: "Новый боевой режим: вид сверху + рогалик-мутаторы", startsAt: "2026-08-22T00:00:00Z", endsAt: "2026-09-29T00:00:00Z" },
     { type: "event", title: "Second Coming of Solaris: Coded Deception", subtitle: "Досуговый ивент (возвращение)", startsAt: "2026-08-27T00:00:00Z", endsAt: "2026-09-14T00:00:00Z" },
